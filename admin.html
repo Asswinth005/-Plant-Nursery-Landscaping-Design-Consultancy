@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Admin Dashboard | Verdant Essence - Garden Management Portal</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🌿%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Admin dashboard for Verdant Essence - manage customers, landscape consultations, plant deliveries, maintenance schedules, and garden care operations.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'verdant': '#2F6B47',
+                        'verdant-dark': '#1F4A30',
+                        'verdant-light': '#4A9B6E',
+                        'verdant-glow': '#6ECB8F',
+                        'soil': '#8B6B4A',
+                        'leaf': '#85A65E',
+                        'canvas-light': '#F8F6F0',
+                        'canvas-dark': '#121212',
+                        'canvas-charcoal': '#1E1E1E',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            background: #F8F6F0;
+            font-family: 'Inter', sans-serif;
+            color: #1E1E1E;
+            line-height: 1.5;
+        }
+
+        .dark body {
+            background: #121212;
+            color: #E8EDEE;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            border-right: 1px solid rgba(47,107,71,0.2);
+            transition: transform 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .dark .sidebar {
+            background: #1A1A1A;
+            border-right-color: #2A2A2A;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            display: none;
+        }
+
+        .sidebar-overlay.open {
+            display: block;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.5rem;
+            margin: 0.25rem 0.75rem;
+            border-radius: 12px;
+            color: #6B7280;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .dark .sidebar-item {
+            color: #9CA3AF;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(47,107,71,0.1);
+            color: #2F6B47;
+        }
+
+        .sidebar-item.active {
+            background: #2F6B47;
+            color: white;
+        }
+
+        .dark .sidebar-item.active {
+            background: #4A9B6E;
+            color: #121212;
+        }
+
+        .sidebar-item i {
+            width: 24px;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding-top: 70px;
+            }
+        }
+
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(47,107,71,0.2);
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dark .mobile-header {
+            background: #1A1A1A;
+            border-bottom-color: #2A2A2A;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: flex;
+            }
+        }
+
+        .top-header {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(47,107,71,0.2);
+        }
+
+        .dark .top-header {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid rgba(47,107,71,0.2);
+            transition: all 0.3s;
+        }
+
+        .dark .stat-card {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: #2F6B47;
+        }
+
+        .data-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid rgba(47,107,71,0.2);
+            transition: all 0.2s;
+        }
+
+        .dark .data-card {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+        }
+
+        .data-card:hover {
+            border-color: #2F6B47;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dark .progress-bar {
+            background: #2A2A2A;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2F6B47;
+            border-radius: 4px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(46, 125, 50, 0.15);
+            color: #2E7D32;
+        }
+
+        .status-pending {
+            background: rgba(255, 152, 0, 0.15);
+            color: #EF6C00;
+        }
+
+        .status-review {
+            background: rgba(47,107,71,0.15);
+            color: #2F6B47;
+        }
+
+        .status-delivered {
+            background: rgba(33, 150, 243, 0.15);
+            color: #1565C0;
+        }
+
+        .dark .status-active {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81C784;
+        }
+
+        .dark .status-pending {
+            background: rgba(255, 152, 0, 0.2);
+            color: #FFB74D;
+        }
+
+        .dark .status-review {
+            background: rgba(47,107,71,0.25);
+            color: #4A9B6E;
+        }
+
+        .dark .status-delivered {
+            background: rgba(33, 150, 243, 0.2);
+            color: #64B5F6;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 40px;
+            background: #F0F0F0;
+            color: #2F6B47;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .dark .toggle-btn { background: #2A2A2A; color: #FFFFFF; }
+        .toggle-btn:hover { background: #2F6B47; color: white; transform: rotate(15deg); }
+
+        .logout-btn {
+            background: #F0F0F0;
+            color: #2F6B47;
+            padding: 0.75rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dark .logout-btn { background: #2A2A2A; color: #FFFFFF; }
+        .logout-btn:hover { background: #2F6B47; color: white; }
+
+        .btn-primary {
+            background: #2F6B47;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #1F4A30;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(47,107,71,0.4);
+        }
+
+        .btn-outline {
+            border: 1.5px solid #2F6B47;
+            background: transparent;
+            color: #2F6B47;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: #2F6B47;
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2F6B47;
+            border-radius: 4px;
+        }
+
+        .page-content.hidden {
+            display: none;
+        }
+
+        [dir="rtl"] .sidebar {
+            left: auto;
+            right: 0;
+            border-right: none;
+            border-left: 1px solid rgba(47,107,71,0.2);
+        }
+
+        [dir="rtl"] .main-content {
+            margin-left: 0;
+            margin-right: 280px;
+        }
+
+        @media (max-width: 768px) {
+            [dir="rtl"] .main-content {
+                margin-right: 0;
+            }
+            [dir="rtl"] .sidebar {
+                transform: translateX(100%);
+            }
+            [dir="rtl"] .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        .form-input, .form-select {
+            border: 1px solid #D1D5DB;
+            border-radius: 12px;
+            padding: 0.75rem;
+            width: 100%;
+            background: white;
+            transition: all 0.2s;
+        }
+        .dark .form-input, .dark .form-select {
+            background: #2A2A2A;
+            border-color: #4A4A4A;
+            color: #E8EDEE;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #2F6B47;
+            box-shadow: 0 0 0 3px rgba(47,107,71,0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-canvas-light dark:bg-canvas-dark">
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="flex items-center gap-3">
+            <button id="menuToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+            <a href="index.html" class="flex items-center group">
+                <div class="bg-white dark:bg-[#1A1A1A] px-3 py-1 rounded-full flex items-center shadow-sm border border-gray-200 dark:border-[#2A2A2A]">
+                    <span class="text-lg font-display font-bold text-verdant">Verdant</span><span class="text-lg font-display font-bold text-gray-900 dark:text-white">Essence</span>
+                </div>
+            </a>
+        </div>
+        <div class="flex gap-2">
+            <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+            <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+        </div>
+    </div>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-5 border-b border-verdant/20 dark:border-gray-800 shrink-0">
+            <a href="index.html" class="flex flex-col items-start gap-2 group">
+                <div class="bg-white dark:bg-[#1A1A1A] px-4 py-1.5 rounded-full flex items-center shadow-sm border border-gray-200 dark:border-[#2A2A2A] transform group-hover:scale-105 transition-transform">
+                    <span class="text-xl font-display font-bold text-verdant">Verdant</span><span class="text-xl font-display font-bold text-gray-900 dark:text-white">Essence</span>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 px-2">Admin Portal</p>
+            </a>
+        </div>
+        <nav class="py-4 flex-grow overflow-y-auto">
+            <div class="sidebar-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
+            <div class="sidebar-item" data-page="customers"><i class="fas fa-users"></i><span>Homeowners</span></div>
+            <div class="sidebar-item" data-page="consultations"><i class="fas fa-calendar-check"></i><span>Consultations</span></div>
+            <div class="sidebar-item" data-page="mockups"><i class="fas fa-cube"></i><span>3D Mockups</span></div>
+            <div class="sidebar-item" data-page="deliveries"><i class="fas fa-truck"></i><span>Plant Deliveries</span></div>
+            <div class="sidebar-item" data-page="maintenance"><i class="fas fa-leaf"></i><span>Maintenance Jobs</span></div>
+            <div class="sidebar-item" data-page="team"><i class="fas fa-users-gear"></i><span>Garden Team</span></div>
+            <div class="sidebar-item" data-page="reports"><i class="fas fa-chart-bar"></i><span>Reports</span></div>
+            <div class="sidebar-item" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></div>
+        </nav>
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-verdant/20 dark:border-gray-800">
+            <div class="flex">
+                <a href="login.html" class="logout-btn w-full gap-2 font-semibold text-sm">Logout <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header flex justify-between items-center flex-wrap gap-3">
+            <div>
+                <h1 class="text-2xl font-display font-bold" id="page-title">Dashboard</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400" id="page-subtitle">Welcome back, Admin</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle-top" class="toggle-btn hidden md:inline-flex"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle-top" class="toggle-btn hidden md:inline-flex">⇄</button>
+            </div>
+        </div>
+
+        <!-- ===== DASHBOARD ===== -->
+        <div id="page-dashboard" class="page-content">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500">Total Homeowners</p><p class="text-2xl font-bold text-verdant">847</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-users text-verdant"></i></div></div><p class="text-xs text-green-600 dark:text-green-400 mt-2">+32 this month</p></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500">Active Consultations</p><p class="text-2xl font-bold text-verdant">18</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-calendar-alt text-verdant"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500">Pending Deliveries</p><p class="text-2xl font-bold text-verdant">24</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-truck text-verdant"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500">Maintenance Jobs</p><p class="text-2xl font-bold text-verdant">37</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-leaf text-verdant"></i></div></div><p class="text-xs text-gray-500">This week: 12 scheduled</p></div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="stat-card"><h3 class="font-display font-bold text-lg mb-3">Recent Consultations</h3>
+                    <div class="space-y-3"><div class="flex justify-between items-start gap-3 pb-2 border-b border-verdant/20"><div><p class="font-medium">Sarah Thompson - Full Garden Design</p><p class="text-xs text-gray-500">June 15, 2025 @ 10:00 AM</p></div><span class="status-badge status-review shrink-0">Confirmed</span></div>
+                    <div class="flex justify-between items-start gap-3 pb-2 border-b border-verdant/20"><div><p class="font-medium">Michael Chen - Native Plant Consultation</p><p class="text-xs text-gray-500">June 16, 2025 @ 2:00 PM</p></div><span class="status-badge status-pending shrink-0">Pending</span></div>
+                    <div class="flex justify-between items-start gap-3"><div><p class="font-medium">Emily Rodriguez - Irrigation Planning</p><p class="text-xs text-gray-500">June 18, 2025 @ 11:00 AM</p></div><span class="status-badge status-active shrink-0">Assigned</span></div></div>
+                    <button class="text-sm text-verdant mt-3 hover:underline">View all consultations →</button>
+                </div>
+                <div class="stat-card"><h3 class="font-display font-bold text-lg mb-3">Service Metrics</h3>
+                    <div class="space-y-3"><div><div class="flex justify-between text-sm mb-1"><span>Consultation Conversion</span><span class="text-verdant">68%</span></div><div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>On-Time Delivery Rate</span><span class="text-verdant">94%</span></div><div class="progress-bar"><div class="progress-fill" style="width:94%"></div></div></div>
+                    <div><div class="flex justify-between text-sm mb-1"><span>Client Satisfaction</span><span class="text-verdant">4.9/5</span></div><div class="progress-bar"><div class="progress-fill" style="width:98%"></div></div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== HOMEOWNERS PAGE ===== -->
+        <div id="page-customers" class="page-content hidden">
+            <div class="stat-card"><div class="flex justify-between items-center mb-4 flex-wrap gap-2"><h3 class="font-display font-bold text-xl">Homeowner Registry</h3><button class="btn-primary text-sm py-2 px-4">+ Add Homeowner</button></div>
+                <div class="hidden md:block overflow-x-auto"><table class="w-full text-sm"><thead class="border-b border-verdant/20"><tr class="text-left"><th class="pb-2">Name</th><th class="pb-2">Email</th><th class="pb-2">Property Address</th><th class="pb-2">Status</th><th class="pb-2">Joined</th></tr></thead>
+                    <tbody><tr class="border-b border-verdant/20"><td class="py-3">Sarah Thompson</td><td class="py-3">sarah@example.com</td><td class="py-3">123 Garden Lane, Austin, TX</td><td class="py-3"><span class="status-badge status-active">Active</span></td><td class="py-3">May 10, 2025</td></tr>
+                    <tr class="border-b border-verdant/20"><td class="py-3">Michael Chen</td><td class="py-3">mchen@example.com</td><td class="py-3">456 Oak Ave, Austin, TX</td><td class="py-3"><span class="status-badge status-active">Active</span></td><td class="py-3">May 8, 2025</td></tr>
+                    <tr class="border-b border-verdant/20"><td class="py-3">Emily Rodriguez</td><td class="py-3">emily.r@example.com</td><td class="py-3">789 Pine St, Austin, TX</td><td class="py-3"><span class="status-badge status-pending">Pending</span></td><td class="py-3">May 5, 2025</td></tr>
+                    <tr><td class="py-3">David Wilson</td><td class="py-3">dwilson@example.com</td><td class="py-3">321 Cedar Rd, Austin, TX</td><td class="py-3"><span class="status-badge status-active">Active</span></td><td class="py-3">Apr 28, 2025</td></tr>
+                    </tbody>
+                </table></div>
+                <div class="block md:hidden space-y-3"><div class="data-card"><p class="font-semibold">Sarah Thompson</p><p class="text-xs text-gray-500"><i class="fas fa-envelope w-4 mr-1"></i> sarah@example.com</p><p class="text-xs text-gray-500"><i class="fas fa-home w-4 mr-1"></i> 123 Garden Lane, Austin, TX</p><span class="status-badge status-active mt-1 inline-block">Active</span></div>
+                <div class="data-card"><p class="font-semibold">Michael Chen</p><p class="text-xs text-gray-500"><i class="fas fa-envelope w-4 mr-1"></i> mchen@example.com</p><p class="text-xs text-gray-500"><i class="fas fa-home w-4 mr-1"></i> 456 Oak Ave, Austin, TX</p><span class="status-badge status-active">Active</span></div>
+                <div class="data-card"><p class="font-semibold">Emily Rodriguez</p><p class="text-xs text-gray-500"><i class="fas fa-envelope w-4 mr-1"></i> emily.r@example.com</p><p class="text-xs text-gray-500"><i class="fas fa-home w-4 mr-1"></i> 789 Pine St, Austin, TX</p><span class="status-badge status-pending">Pending</span></div></div>
+            </div>
+        </div>
+
+        <!-- ===== CONSULTATIONS PAGE ===== -->
+        <div id="page-consultations" class="page-content hidden">
+            <div class="stat-card"><div class="flex justify-between items-center mb-4 flex-wrap gap-2"><h3 class="font-display font-bold text-xl">Landscape Consultations</h3><button class="btn-primary text-sm py-2 px-4">+ Schedule</button></div>
+                <div class="space-y-3"><div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Sarah Thompson - Full Garden Design</p><p class="text-xs text-gray-500">June 15, 2025 @ 10:00 AM | Consultant: Elena Varela</p></div><span class="status-badge status-review">Confirmed</span></div><div class="mt-1 text-xs text-verdant"><i class="fas fa-map-marker-alt"></i> 123 Garden Lane, Austin, TX</div></div>
+                <div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Michael Chen - Native Plant Consultation</p><p class="text-xs text-gray-500">June 16, 2025 @ 2:00 PM | Consultant: Marcus Chen</p></div><span class="status-badge status-pending">Pending</span></div><div class="mt-1 text-xs text-verdant"><i class="fas fa-map-marker-alt"></i> 456 Oak Ave, Austin, TX</div></div>
+                <div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Emily Rodriguez - Irrigation Planning</p><p class="text-xs text-gray-500">June 18, 2025 @ 11:00 AM | Consultant: Sophia Ramirez</p></div><span class="status-badge status-active">Assigned</span></div><div class="mt-1 text-xs text-verdant"><i class="fas fa-map-marker-alt"></i> 789 Pine St, Austin, TX</div></div></div>
+            </div>
+        </div>
+
+        <!-- ===== 3D MOCKUPS PAGE ===== -->
+        <div id="page-mockups" class="page-content hidden">
+            <div class="stat-card"><div class="flex justify-between items-center mb-4 flex-wrap gap-2"><h3 class="font-display font-bold text-xl">3D Landscape Mockups</h3><button class="btn-primary text-sm py-2 px-4">+ Upload New</button></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="data-card"><div class="rounded-xl h-32 overflow-hidden"><img src="images/front_yard.png" alt="Front Yard Transformation" class="w-full h-full object-cover"></div><div class="mt-3"><p class="font-semibold">Front Yard Transformation</p><p class="text-xs text-gray-500">Client: Sarah Thompson | Status: Pending Approval</p><div class="flex gap-2 mt-2"><button class="btn-outline text-xs py-1 px-3">Approve</button><button class="text-verdant text-xs">Request Changes</button></div></div></div>
+                <div class="data-card"><div class="rounded-xl h-32 overflow-hidden"><img src="images/backyard.png" alt="Backyard Oasis" class="w-full h-full object-cover"></div><div class="mt-3"><p class="font-semibold">Backyard Oasis</p><p class="text-xs text-gray-500">Client: Michael Chen | Status: Approved</p><div class="flex gap-2 mt-2"><button class="btn-outline text-xs py-1 px-3">Share</button><button class="text-verdant text-xs">View Details</button></div></div></div>
+                <div class="data-card"><div class="rounded-xl h-32 overflow-hidden"><img src="images/xeriscape.png" alt="Xeriscape Design" class="w-full h-full object-cover"></div><div class="mt-3"><p class="font-semibold">Xeriscape Design</p><p class="text-xs text-gray-500">Client: Emily Rodriguez | Status: In Progress</p><div class="flex gap-2 mt-2"><button class="btn-outline text-xs py-1 px-3">Review</button><button class="text-verdant text-xs">Edit</button></div></div></div></div>
+            </div>
+        </div>
+
+        <!-- ===== PLANT DELIVERIES PAGE ===== -->
+        <div id="page-deliveries" class="page-content hidden">
+            <div class="stat-card"><div class="flex justify-between items-center mb-4 flex-wrap gap-2"><h3 class="font-display font-bold text-xl">Plant Deliveries</h3><button class="btn-primary text-sm py-2 px-4">+ Create Order</button></div>
+                <div class="space-y-3"><div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Order #VE-2451 - Sarah Thompson</p><p class="text-xs text-gray-500">5 items | Placed: May 8, 2025</p><p class="text-xs">Monstera, Fiddle Leaf Fig, Snake Plant, Calathea, ZZ Plant</p></div><span class="status-badge status-active">Shipped</span></div><div class="mt-2"><div class="flex justify-between text-sm mb-1"><span>Tracking</span><span>In Transit - ETA June 12</span></div><div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div></div><button class="text-verdant text-sm mt-2">Update Status →</button></div>
+                <div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Order #VE-2389 - Michael Chen</p><p class="text-xs text-gray-500">3 items | Placed: April 25, 2025</p><p class="text-xs">Organic Soil, Ceramic Pots, Fertilizer</p></div><span class="status-badge status-delivered">Delivered</span></div></div>
+                <div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Order #VE-2522 - Emily Rodriguez</p><p class="text-xs text-gray-500">8 items | Placed: June 1, 2025</p><p class="text-xs">Succulent Collection, Lavender, Rosemary, Mint</p></div><span class="status-badge status-pending">Processing</span></div><button class="text-verdant text-sm mt-2">Mark as Shipped →</button></div></div>
+            </div>
+        </div>
+
+        <!-- ===== MAINTENANCE JOBS PAGE ===== -->
+        <div id="page-maintenance" class="page-content hidden">
+            <div class="stat-card"><div class="flex justify-between items-center mb-4 flex-wrap gap-2"><h3 class="font-display font-bold text-xl">Seasonal Maintenance Jobs</h3><button class="btn-primary text-sm py-2 px-4">+ Schedule Job</button></div>
+                <div class="space-y-3"><div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Spring Cleanup & Mulching</p><p class="text-xs text-gray-500">Client: Sarah Thompson | June 20, 2025</p></div><span class="status-badge status-review">Confirmed</span></div><div class="mt-1 flex justify-between"><span class="text-xs text-verdant">Assigned to: Garden Team A</span><button class="text-verdant text-sm">View Details</button></div></div>
+                <div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Irrigation System Check</p><p class="text-xs text-gray-500">Client: Michael Chen | June 22, 2025</p></div><span class="status-badge status-pending">Pending</span></div><div class="mt-1 flex justify-between"><span class="text-xs text-verdant">Unassigned</span><button class="text-verdant text-sm">Assign Team</button></div></div>
+                <div class="data-card"><div class="flex justify-between flex-wrap gap-2"><div><p class="font-semibold">Fall Leaf Removal + Planting</p><p class="text-xs text-gray-500">Client: Emily Rodriguez | June 25, 2025</p></div><span class="status-badge status-active">In Progress</span></div><div class="mt-1 flex justify-between"><span class="text-xs text-verdant">Assigned to: Garden Team B</span><button class="text-verdant text-sm">Update Status</button></div></div></div>
+            </div>
+        </div>
+
+        <!-- ===== GARDEN TEAM PAGE ===== -->
+        <div id="page-team" class="page-content hidden">
+            <div class="stat-card"><div class="flex justify-between items-center mb-4 flex-wrap gap-2"><h3 class="font-display font-bold text-xl">Garden Team Members</h3><button class="btn-primary text-sm py-2 px-4">+ Add Team Member</button></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="data-card flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user-circle text-verdant text-2xl"></i></div><div><p class="font-semibold">Elena Varela</p><p class="text-xs text-gray-500">Lead Landscape Architect</p><p class="text-xs text-verdant">6 active consultations</p></div></div><span class="status-badge status-active">Available</span></div>
+                <div class="data-card flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user-circle text-verdant text-2xl"></i></div><div><p class="font-semibold">Marcus Chen</p><p class="text-xs text-gray-500">Senior Horticulturist</p><p class="text-xs text-verdant">4 active consultations</p></div></div><span class="status-badge status-active">On Site</span></div>
+                <div class="data-card flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user-circle text-verdant text-2xl"></i></div><div><p class="font-semibold">Sophia Ramirez</p><p class="text-xs text-gray-500">Sustainable Design Lead</p><p class="text-xs text-verdant">3 active consultations</p></div></div><span class="status-badge status-pending">Off Duty</span></div>
+                <div class="data-card flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-12 h-12 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user-circle text-verdant text-2xl"></i></div><div><p class="font-semibold">David Kim</p><p class="text-xs text-gray-500">Irrigation Specialist</p><p class="text-xs text-verdant">2 active jobs</p></div></div><span class="status-badge status-active">Available</span></div></div>
+            </div>
+        </div>
+
+        <!-- ===== REPORTS PAGE ===== -->
+        <div id="page-reports" class="page-content hidden">
+            <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">Generate Reports</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><button class="data-card text-left flex justify-between items-center"><div><p class="font-semibold">Consultation Summary</p><p class="text-xs text-gray-500">Monthly consultation volume & conversion</p></div><i class="fas fa-download text-verdant"></i></button>
+                <button class="data-card text-left flex justify-between items-center"><div><p class="font-semibold">Delivery Analytics</p><p class="text-xs text-gray-500">Order volume & on-time performance</p></div><i class="fas fa-download text-verdant"></i></button>
+                <button class="data-card text-left flex justify-between items-center"><div><p class="font-semibold">Maintenance Schedule Report</p><p class="text-xs text-gray-500">Upcoming & completed jobs</p></div><i class="fas fa-download text-verdant"></i></button>
+                <button class="data-card text-left flex justify-between items-center"><div><p class="font-semibold">Client Satisfaction Survey</p><p class="text-xs text-gray-500">Feedback & ratings analysis</p></div><i class="fas fa-download text-verdant"></i></button></div>
+            </div>
+        </div>
+
+        <!-- ===== SETTINGS PAGE ===== -->
+        <div id="page-settings" class="page-content hidden">
+            <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">System Settings</h3>
+                <div class="space-y-4"><div><label class="block text-sm font-medium mb-1">Company Name</label><input type="text" value="Verdant Essence" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Admin Email</label><input type="email" value="admin@verdantessence.com" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Consultation Reminder Settings</label><select class="form-select"><option>Send SMS & Email 24h before</option><option>Send Email only</option><option>No reminders</option></select></div>
+                <div><label class="block text-sm font-medium mb-1">Delivery Notification Preferences</label><select class="form-select"><option>Notify customer at each status update</option><option>Only when shipped & delivered</option></select></div>
+                <div><label class="block text-sm font-medium mb-1">Seasonal Maintenance Templates</label><textarea rows="3" class="form-textarea" placeholder="Spring: Mulching, pruning, cleanup&#10;Summer: Irrigation check, pest control&#10;Fall: Leaf removal, bulb planting&#10;Winter: Frost protection, pruning"></textarea></div>
+                <button class="btn-primary w-full md:w-auto">Save Changes</button></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle'), themeToggleMobile = document.getElementById('theme-toggle-mobile'), themeToggleTop = document.getElementById('theme-toggle-top');
+            function setTheme(isDark) {
+                if (isDark) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+                [themeToggle, themeToggleMobile, themeToggleTop].forEach(btn => {
+                    if (btn) {
+                        let moon = btn.querySelector('.fa-moon'), sun = btn.querySelector('.fa-sun');
+                        if (isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+                        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+                    }
+                });
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+            const savedTheme = localStorage.getItem('theme');
+            setTheme(savedTheme === 'dark');
+            if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleTop) themeToggleTop.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+            const rtlToggle = document.getElementById('rtl-toggle'), rtlToggleMobile = document.getElementById('rtl-toggle-mobile'), rtlToggleTop = document.getElementById('rtl-toggle-top');
+            function setRTL(isRTL) { document.documentElement.dir = isRTL ? 'rtl' : 'ltr'; localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr'); }
+            if (localStorage.getItem('dir') === 'rtl') setRTL(true);
+            if (rtlToggle) rtlToggle.addEventListener('click', () => setRTL(document.documentElement.dir !== 'rtl'));
+            if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', () => setRTL(document.documentElement.dir !== 'rtl'));
+            if (rtlToggleTop) rtlToggleTop.addEventListener('click', () => setRTL(document.documentElement.dir !== 'rtl'));
+
+            const menuToggle = document.getElementById('menuToggle'), sidebar = document.getElementById('sidebar'), overlay = document.getElementById('sidebarOverlay');
+            function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+            function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+            if (menuToggle) menuToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+            window.addEventListener('resize', () => { if (window.innerWidth > 768 && sidebar.classList.contains('open')) closeSidebar(); });
+
+            const sidebarItems = document.querySelectorAll('.sidebar-item'), pages = document.querySelectorAll('.page-content');
+            const pageTitle = document.getElementById('page-title'), pageSubtitle = document.getElementById('page-subtitle');
+            const titles = { 
+                dashboard: { title: 'Dashboard', subtitle: 'Welcome back, Admin' }, 
+                customers: { title: 'Homeowners', subtitle: 'Manage customer registry' }, 
+                consultations: { title: 'Landscape Consultations', subtitle: 'Schedule and track consultations' }, 
+                mockups: { title: '3D Landscape Mockups', subtitle: 'Manage design mockups' }, 
+                deliveries: { title: 'Plant Deliveries', subtitle: 'Track and manage orders' }, 
+                maintenance: { title: 'Maintenance Jobs', subtitle: 'Schedule garden services' }, 
+                team: { title: 'Garden Team', subtitle: 'Staff management' }, 
+                reports: { title: 'Reports', subtitle: 'Analytics & insights' }, 
+                settings: { title: 'Settings', subtitle: 'System configuration' } 
+            };
+            sidebarItems.forEach(item => { item.addEventListener('click', () => { const page = item.getAttribute('data-page'); sidebarItems.forEach(i => i.classList.remove('active')); item.classList.add('active'); pages.forEach(p => p.classList.add('hidden')); document.getElementById(`page-${page}`).classList.remove('hidden'); if (titles[page]) { pageTitle.textContent = titles[page].title; pageSubtitle.textContent = titles[page].subtitle; } closeSidebar(); }); });
+        });
+    </script>
+</body>
+
+</html>

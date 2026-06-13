@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Verdant Essence | Plant Nursery & Landscaping</title>
+    <!-- Custom Favicon - Leaf Icon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🌿%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Oops! The page you're looking for has wandered off. Let's get you back to our garden of premium plants and landscaping services.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'verdant': '#2F6B47',
+                        'verdant-dark': '#1F4A30',
+                        'verdant-light': '#4A9B6E',
+                        'verdant-glow': '#6ECB8F',
+                        'soil': '#8B6B4A',
+                        'leaf': '#85A65E',
+                        'canvas-light': '#F8F6F0',
+                        'canvas-dark': '#121212',
+                        'canvas-charcoal': '#1E1E1E',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'leaf-pattern': "radial-gradient(circle at 20% 30%, rgba(47,107,71,0.04) 0%, transparent 60%)",
+                    },
+                    animation: {
+                        'spin-slow': 'spinSlow 12s linear infinite',
+                        'leaf-pulse': 'leafPulse 2s ease-in-out infinite',
+                        'float-gentle': 'floatGentle 4s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                        'pulse-gentle': 'pulseGentle 2s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                        'sway': 'sway 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        spinSlow: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        leafPulse: {
+                            '0%,100%': { opacity: '0.6', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.05)' },
+                        },
+                        floatGentle: {
+                            '0%,100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseGentle: {
+                            '0%,100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                        shimmer: {
+                            '0%,100%': { textShadow: '0 0 0px rgba(47,107,71,0)' },
+                            '50%': { textShadow: '0 0 20px rgba(47,107,71,0.4)' },
+                        },
+                        sway: {
+                            '0%,100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #F8F6F0;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #1E1E1E;
+            line-height: 1.6;
+        }
+
+        .dark body {
+            background-color: #121212;
+            color: #E8EDEE;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 40px;
+            background: #F0F0F0;
+            color: #2F6B47;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dark .toggle-btn { background: #2A2A2A; color: #FFFFFF; }
+        .toggle-btn:hover { background: #2F6B47; color: white; transform: rotate(15deg); }
+
+        /* Button styles */
+        .btn-primary {
+            background: #2F6B47;
+            color: white;
+            padding: 0.85rem 2rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(47,107,71,0.35);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #1F4A30;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(47,107,71,0.45);
+        }
+
+        .dark .btn-primary {
+            background: #4A9B6E;
+            color: #121212;
+        }
+
+        .dark .btn-primary:hover {
+            background: #2F6B47;
+            color: white;
+        }
+
+        .btn-secondary {
+            border: 1.5px solid #2F6B47;
+            background: transparent;
+            color: #2F6B47;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .btn-secondary {
+            border-color: #4A9B6E;
+            color: #4A9B6E;
+        }
+
+        .btn-secondary:hover {
+            background: #2F6B47;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .dark .btn-secondary:hover {
+            background: #4A9B6E;
+            color: #121212;
+        }
+
+        /* Accent line */
+        .verdant-line {
+            width: 70px;
+            height: 3px;
+            background: #2F6B47;
+            margin: 1rem auto;
+            border-radius: 3px;
+        }
+
+        .dark .verdant-line {
+            background: #4A9B6E;
+        }
+
+        /* Animated leaf element */
+        .floating-leaf {
+            animation: floatGentle 4s ease-in-out infinite;
+        }
+
+        /* Pulse animation */
+        .leaf-animation i {
+            animation: leafPulse 2s ease-in-out infinite;
+        }
+
+        /* Sway animation for leaves */
+        .sway-leaf {
+            animation: sway 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        /* RTL Fixes */
+        [dir="rtl"] .space-x-3> :not([hidden])~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
+            margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+            margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+        }
+
+        [dir="rtl"] .ml-8 {
+            margin-left: 0;
+            margin-right: 2rem;
+        }
+
+        [dir="rtl"] .mr-2 {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        [dir="rtl"] .verdant-line {
+            margin: 1rem auto;
+        }
+
+        /* Shimmer text */
+        .shimmer-text {
+            animation: shimmer 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="leaf-pattern">
+
+    <!-- ========== HEADER ========== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-canvas-dark/95 backdrop-blur-md border-b border-verdant/20 shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20 md:h-24 py-3 md:py-0">
+                <!-- Logo -->
+                <div class="flex-1 flex justify-start">
+                    <a href="index.html" class="flex items-center space-x-3 group shrink-0">
+                        <div class="bg-white dark:bg-[#1A1A1A] px-5 py-2 rounded-full flex items-center shadow-md border border-gray-200 dark:border-[#2A2A2A] transform group-hover:scale-105 transition-transform">
+                            <span class="text-2xl font-display font-bold text-verdant">Verdant</span><span class="text-2xl font-display font-bold text-gray-900 dark:text-white">Essence</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                    <button id="rtl-toggle" class="toggle-btn">⇄</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== 404 MAIN CONTENT ========== -->
+    <div class="min-h-screen flex items-center justify-center pt-32 pb-20 px-6">
+        <div class="max-w-2xl mx-auto text-center animate-fade-in-up">
+            <!-- Animated Leaf/Plant Icon -->
+            <div class="mb-6 floating-leaf">
+                <div class="w-28 h-28 md:w-36 md:h-36 rounded-full border-8 border-verdant/20 flex items-center justify-center mx-auto relative leaf-animation">
+                    <i class="fas fa-leaf text-verdant dark:text-verdant-light text-5xl md:text-6xl animate-pulse-gentle sway-leaf"></i>
+                    <div class="absolute inset-0 rounded-full border-4 border-verdant/30 animate-ping opacity-75"></div>
+                    <i class="fas fa-seedling text-verdant-dark dark:text-verdant absolute -top-2 -right-2 text-xl animate-pulse"></i>
+                </div>
+            </div>
+
+            <!-- Large 404 Number -->
+            <div class="mb-4">
+                <span class="text-[120px] md:text-[180px] font-display font-extrabold text-verdant dark:text-verdant-light leading-none tracking-tighter drop-shadow-lg shimmer-text">404</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-white mb-3">
+                Oops! This Page Has Wilted
+            </h1>
+
+            <!-- Divider -->
+            <div class="verdant-line"></div>
+
+            <!-- Message -->
+            <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-md mx-auto">
+                The page you're looking for has wandered off into the garden. Don't worry — our horticulturists will help you find your way back.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-4 justify-center mb-12">
+                <a href="index.html" class="btn-primary">
+                    <i class="fas fa-home mr-1"></i> Back to Home
+                </a>
+                <a href="nursery.html" class="btn-secondary">
+                    <i class="fas fa-seedling mr-1"></i> Explore Nursery
+                </a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="border-t border-verdant/20 pt-8">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <i class="fas fa-leaf text-verdant mr-2"></i> Quick Navigation — Find Your Way
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <a href="about.html" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-verdant dark:hover:text-verdant-light transition">About</a>
+                    <span class="text-verdant/30">•</span>
+                    <a href="nursery.html" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-verdant dark:hover:text-verdant-light transition">Plants & Nursery</a>
+                    <span class="text-verdant/30">•</span>
+                    <a href="portfolio.html" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-verdant dark:hover:text-verdant-light transition">Portfolio</a>
+                    <span class="text-verdant/30">•</span>
+                    <a href="consult.html" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-verdant dark:hover:text-verdant-light transition">Consultancy</a>
+                    <span class="text-verdant/30">•</span>
+                    <a href="service.html" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-verdant dark:hover:text-verdant-light transition">Services</a>
+                    <span class="text-verdant/30">•</span>
+                    <a href="contact.html" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-verdant dark:hover:text-verdant-light transition">Contact</a>
+                </div>
+            </div>
+
+            <!-- Need Help Note -->
+            <div class="mt-8 text-xs text-gray-400 dark:text-gray-500">
+                <i class="fas fa-phone-alt mr-1 text-verdant"></i> Need plant care advice? Call us at <a href="tel:+15125558840" class="text-verdant dark:text-verdant-light hover:underline">(512) 555-8840</a>
+            </div>
+
+            <!-- Fun Fact Note -->
+            <div class="mt-4 text-xs text-gray-400 dark:text-gray-600">
+                <i class="fas fa-smile-wink mr-1"></i> Fun fact: Most indoor plants can remove up to 87% of air toxins in 24 hours.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle
+            const themeBtn = document.getElementById('theme-toggle');
+
+            const updateThemeUI = (isDark) => {
+                if (themeBtn) {
+                    const moon = themeBtn.querySelector('.fa-moon');
+                    const sun = themeBtn.querySelector('.fa-sun');
+                    if (moon && sun) {
+                        if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); }
+                        else { moon.classList.remove('hidden'); sun.classList.add('hidden'); }
+                    }
+                    themeBtn.classList.toggle('active', isDark);
+                }
+            };
+
+            const toggleTheme = () => {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeUI(isDark);
+            };
+
+            if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+            // Check saved theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeUI(true);
+            } else if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.remove('dark');
+                updateThemeUI(false);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+                updateThemeUI(true);
+            }
+
+            // RTL Toggle
+            const rtlBtn = document.getElementById('rtl-toggle');
+
+            const updateRtlUI = (isRtl) => {
+                const dir = isRtl ? 'rtl' : 'ltr';
+                document.documentElement.dir = dir;
+                document.documentElement.lang = isRtl ? 'ar' : 'en';
+                if (rtlBtn) rtlBtn.classList.toggle('active', isRtl);
+            };
+
+            const toggleRtl = () => {
+                const isRtl = document.documentElement.dir !== 'rtl';
+                localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr');
+                updateRtlUI(isRtl);
+            };
+
+            if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+
+            // Check saved RTL direction
+            if (localStorage.getItem('dir') === 'rtl') {
+                updateRtlUI(true);
+            } else {
+                updateRtlUI(false);
+            }
+
+            // Add active class to theme button based on actual state
+            if (document.documentElement.classList.contains('dark')) {
+                themeBtn?.classList.add('active');
+                const moon = themeBtn?.querySelector('.fa-moon');
+                const sun = themeBtn?.querySelector('.fa-sun');
+                if (moon && sun) {
+                    moon.classList.add('hidden');
+                    sun.classList.remove('hidden');
+                }
+            } else {
+                themeBtn?.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

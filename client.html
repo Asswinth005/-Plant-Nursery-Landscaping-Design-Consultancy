@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Verdant Essence Portal | Homeowner Garden Dashboard</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🌿%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Manage your landscape consultations, view 3D garden mockups, track plant deliveries, access seasonal care schedules, and schedule maintenance for your garden.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'verdant': '#2F6B47',
+                        'verdant-dark': '#1F4A30',
+                        'verdant-light': '#4A9B6E',
+                        'verdant-glow': '#6ECB8F',
+                        'soil': '#8B6B4A',
+                        'leaf': '#85A65E',
+                        'canvas-light': '#F8F6F0',
+                        'canvas-dark': '#121212',
+                        'canvas-charcoal': '#1E1E1E',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            background: #F8F6F0;
+            font-family: 'Inter', sans-serif;
+            color: #1E1E1E;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .dark body {
+            background: #121212;
+            color: #E8EDEE;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            border-right: 1px solid rgba(47,107,71,0.2);
+            transition: transform 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .dark .sidebar {
+            background: #1A1A1A;
+            border-right-color: #2A2A2A;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            display: none;
+        }
+
+        .sidebar-overlay.open {
+            display: block;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.5rem;
+            margin: 0.25rem 0.75rem;
+            border-radius: 12px;
+            color: #6B7280;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .dark .sidebar-item {
+            color: #9CA3AF;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(47,107,71,0.1);
+            color: #2F6B47;
+        }
+
+        .sidebar-item.active {
+            background: #2F6B47;
+            color: white;
+        }
+
+        .dark .sidebar-item.active {
+            background: #4A9B6E;
+            color: #121212;
+        }
+
+        .sidebar-item i {
+            width: 24px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding-top: 70px;
+            }
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(47,107,71,0.2);
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dark .mobile-header {
+            background: #1A1A1A;
+            border-bottom-color: #2A2A2A;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: flex;
+            }
+        }
+
+        /* Top Header */
+        .top-header {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(47,107,71,0.2);
+        }
+
+        .dark .top-header {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+        }
+
+        /* Cards */
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid rgba(47,107,71,0.2);
+            transition: all 0.3s;
+        }
+
+        .dark .stat-card {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: #2F6B47;
+        }
+
+        /* Mockup Card */
+        .mockup-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid rgba(47,107,71,0.2);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .dark .mockup-card {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+        }
+
+        .mockup-card:hover {
+            border-color: #2F6B47;
+        }
+
+        .mockup-thumb {
+            background: linear-gradient(135deg, #2F6B47 0%, #4A9B6E 100%);
+            border-radius: 12px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-delivered {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .status-shipped {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .status-processing {
+            background: #FFF3E0;
+            color: #EF6C00;
+        }
+
+        .dark .status-delivered {
+            background: #1B5E20;
+            color: #A5D6A7;
+        }
+
+        .dark .status-shipped {
+            background: #01579B;
+            color: #81D4FA;
+        }
+
+        .dark .status-processing {
+            background: #E65100;
+            color: #FFCC80;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .dark .progress-bar {
+            background: #2A2A2A;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2F6B47;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 40px;
+            background: #F0F0F0;
+            color: #2F6B47;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .dark .toggle-btn { background: #2A2A2A; color: #FFFFFF; }
+        .toggle-btn:hover { background: #2F6B47; color: white; transform: rotate(15deg); }
+
+        .logout-btn {
+            background: #F0F0F0;
+            color: #2F6B47;
+            padding: 0.75rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dark .logout-btn { background: #2A2A2A; color: #FFFFFF; }
+        .logout-btn:hover { background: #2F6B47; color: white; }
+
+        /* Primary Button */
+        .btn-primary {
+            background: #2F6B47;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #1F4A30;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(47,107,71,0.4);
+        }
+
+        .btn-outline {
+            border: 1.5px solid #2F6B47;
+            background: transparent;
+            color: #2F6B47;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: #2F6B47;
+            color: white;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2F6B47;
+            border-radius: 4px;
+        }
+
+        /* Page transitions */
+        .page-content.hidden {
+            display: none;
+        }
+
+        /* Care schedule items */
+        .care-item {
+            border-bottom: 1px solid rgba(47,107,71,0.15);
+            padding: 0.75rem 0;
+        }
+        .care-item:last-child {
+            border-bottom: none;
+        }
+
+        /* RTL Support */
+        [dir="rtl"] .sidebar {
+            left: auto;
+            right: 0;
+            border-right: none;
+            border-left: 1px solid rgba(47,107,71,0.2);
+        }
+        [dir="rtl"] .main-content {
+            margin-left: 0;
+            margin-right: 280px;
+        }
+        @media (max-width: 768px) {
+            [dir="rtl"] .main-content {
+                margin-right: 0;
+            }
+            [dir="rtl"] .sidebar {
+                transform: translateX(100%);
+            }
+            [dir="rtl"] .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        /* Form inputs */
+        .form-input, .form-select, .form-textarea {
+            border: 1px solid #D1D5DB;
+            border-radius: 12px;
+            padding: 0.75rem;
+            width: 100%;
+            background: white;
+            transition: all 0.2s;
+        }
+        .dark .form-input, .dark .form-select, .dark .form-textarea {
+            background: #2A2A2A;
+            border-color: #4A4A4A;
+            color: #E8EDEE;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #2F6B47;
+            box-shadow: 0 0 0 3px rgba(47,107,71,0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-canvas-light dark:bg-canvas-dark">
+
+    <div class="mobile-header">
+        <div class="flex items-center gap-3">
+            <button id="menuToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+            <a href="index.html" class="flex items-center group">
+                <div class="bg-white dark:bg-[#1A1A1A] px-3 py-1 rounded-full flex items-center shadow-sm border border-gray-200 dark:border-[#2A2A2A]">
+                    <span class="text-lg font-display font-bold text-verdant">Verdant</span><span class="text-lg font-display font-bold text-gray-900 dark:text-white">Essence</span>
+                </div>
+            </a>
+        </div>
+        <div class="flex gap-2">
+            <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+            <button id="rtl-toggle" class="toggle-btn">⇄</button>
+        </div>
+    </div>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-5 border-b border-verdant/20 dark:border-gray-800">
+            <a href="index.html" class="flex flex-col items-start gap-2 group">
+                <div class="bg-white dark:bg-[#1A1A1A] px-4 py-1.5 rounded-full flex items-center shadow-sm border border-gray-200 dark:border-[#2A2A2A] transform group-hover:scale-105 transition-transform">
+                    <span class="text-xl font-display font-bold text-verdant">Verdant</span><span class="text-xl font-display font-bold text-gray-900 dark:text-white">Essence</span>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 px-2">Homeowner Portal</p>
+            </a>
+        </div>
+        <nav class="py-4">
+            <div class="sidebar-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
+            <div class="sidebar-item" data-page="consultations"><i class="fas fa-calendar-alt"></i><span>Schedule Consultations</span></div>
+            <div class="sidebar-item" data-page="mockups"><i class="fas fa-cube"></i><span>3D Landscape Mockups</span></div>
+            <div class="sidebar-item" data-page="delivery"><i class="fas fa-truck"></i><span>Track Plant Delivery</span></div>
+            <div class="sidebar-item" data-page="care"><i class="fas fa-clipboard-list"></i><span>Plant Care Schedules</span></div>
+            <div class="sidebar-item" data-page="maintenance"><i class="fas fa-leaf"></i><span>Seasonal Maintenance</span></div>
+            <div class="sidebar-item" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></div>
+        </nav>
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-verdant/20 dark:border-gray-800">
+            <div class="flex">
+                <a href="login.html" class="logout-btn w-full gap-2 font-semibold text-sm">Logout <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header flex justify-between items-center flex-wrap gap-3">
+            <div>
+                <h1 class="text-2xl font-display font-bold" id="page-title">Dashboard</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400" id="page-subtitle">Welcome back, Sarah & Michael</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle-top" class="toggle-btn hidden md:inline-flex"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle-top" class="toggle-btn hidden md:inline-flex">⇄</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="page-dashboard" class="page-content">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500 mb-1">Active Consultations</p><p class="text-2xl font-bold text-verdant">2</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-calendar-check text-verdant"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500 mb-1">Pending Mockups</p><p class="text-2xl font-bold text-verdant">1</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-cube text-verdant"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500 mb-1">Plants in Transit</p><p class="text-2xl font-bold text-verdant">3</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-truck text-verdant"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-gray-500 mb-1">Upcoming Maintenance</p><p class="text-2xl font-bold text-verdant">This Week</p></div><div class="w-10 h-10 bg-verdant/10 rounded-full flex items-center justify-center"><i class="fas fa-leaf text-verdant"></i></div></div></div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="stat-card"><h3 class="font-display font-bold text-lg mb-3">Recent Activity</h3>
+                    <div class="space-y-3"><div class="flex gap-3 pb-2 border-b border-verdant/20"><i class="fas fa-calendar-plus text-verdant"></i><div><p class="text-sm font-medium">Consultation scheduled for June 15</p><p class="text-xs text-gray-500">Today, 10:30 AM</p></div></div>
+                    <div class="flex gap-3 pb-2 border-b border-verdant/20"><i class="fas fa-cube text-verdant"></i><div><p class="text-sm font-medium">New 3D mockup ready for review</p><p class="text-xs text-gray-500">Yesterday, 4:15 PM</p></div></div>
+                    <div class="flex gap-3"><i class="fas fa-check-circle text-verdant"></i><div><p class="text-sm font-medium">Plants shipped - Order #VE-2451</p><p class="text-xs text-gray-500">Yesterday, 9:00 AM</p></div></div></div>
+                </div>
+                <div class="stat-card"><h3 class="font-display font-bold text-lg mb-3">Quick Actions</h3>
+                    <div class="space-y-3"><button data-nav="consultations" class="w-full text-left px-4 py-2 bg-verdant/10 rounded-xl hover:bg-verdant/20 transition flex items-center gap-3"><i class="fas fa-calendar-plus text-verdant"></i><span>Schedule New Consultation</span></button>
+                    <button data-nav="mockups" class="w-full text-left px-4 py-2 bg-verdant/10 rounded-xl hover:bg-verdant/20 transition flex items-center gap-3"><i class="fas fa-cube text-verdant"></i><span>View 3D Landscape Mockups</span></button>
+                    <button data-nav="maintenance" class="w-full text-left px-4 py-2 bg-verdant/10 rounded-xl hover:bg-verdant/20 transition flex items-center gap-3"><i class="fas fa-leaf text-verdant"></i><span>Request Seasonal Maintenance</span></button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHEDULE CONSULTATIONS -->
+        <div id="page-consultations" class="page-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="stat-card lg:col-span-2"><h3 class="font-display font-bold text-xl mb-4">Schedule a Landscape Consultation</h3>
+                    <div class="space-y-4"><div><label class="block text-sm font-medium mb-1">Consultation Type</label><select class="form-select"><option>Initial Design Consultation (Free)</option><option>Site Visit & Soil Analysis ($149)</option><option>Full Landscape Planning ($499)</option></select></div>
+                    <div><label class="block text-sm font-medium mb-1">Preferred Date</label><input type="date" class="form-input"></div>
+                    <div><label class="block text-sm font-medium mb-1">Time Slot</label><select class="form-select"><option>Morning (9AM - 12PM)</option><option>Afternoon (1PM - 4PM)</option><option>Evening (4PM - 7PM)</option></select></div>
+                    <div><label class="block text-sm font-medium mb-1">Project Location</label><input type="text" value="123 Garden Lane, Austin, TX 78701" class="form-input"></div>
+                    <div><label class="block text-sm font-medium mb-1">Notes (optional)</label><textarea rows="3" placeholder="Tell us about your garden vision, problem areas, or specific plants you love..." class="form-textarea"></textarea></div>
+                    <button class="btn-primary w-full"><i class="fas fa-check-circle"></i> Request Consultation</button></div>
+                </div>
+                <div class="stat-card"><h3 class="font-display font-bold text-lg mb-3">Upcoming Consultations</h3>
+                    <div class="space-y-3"><div class="p-3 bg-verdant/5 rounded-xl"><div class="flex justify-between items-start"><div><p class="font-semibold">Initial Design Review</p><p class="text-sm text-gray-500">June 15, 2025 • 10:00 AM</p></div><span class="status-badge status-processing">Confirmed</span></div><p class="text-xs text-verdant mt-2">Consultant: Elena Varela</p></div>
+                    <div class="p-3 bg-verdant/5 rounded-xl"><div class="flex justify-between items-start"><div><p class="font-semibold">Site Visit & Soil Test</p><p class="text-sm text-gray-500">June 22, 2025 • 2:00 PM</p></div><span class="status-badge status-processing">Pending</span></div><p class="text-xs text-verdant mt-2">Consultant: Marcus Chen</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3D LANDSCAPE MOCKUPS -->
+        <div id="page-mockups" class="page-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mockup-card"><div class="mockup-thumb overflow-hidden"><img src="images/front_yard.png" alt="Front Yard Mockup" class="w-full h-full object-cover"></div><div class="mt-3"><h3 class="font-bold">Front Yard Transformation</h3><p class="text-sm text-gray-500">Native xeriscape + drought-tolerant plants</p><div class="flex justify-between items-center mt-2"><span class="text-xs text-verdant">Created: May 10, 2025</span><button class="text-verdant text-sm hover:underline">View in 3D →</button></div></div></div>
+                <div class="mockup-card"><div class="mockup-thumb overflow-hidden"><img src="images/backyard.png" alt="Backyard Mockup" class="w-full h-full object-cover"></div><div class="mt-3"><h3 class="font-bold">Backyard Oasis - Revision 2</h3><p class="text-sm text-gray-500">Poolside garden + outdoor kitchen integration</p><div class="flex justify-between items-center mt-2"><span class="text-xs text-verdant">Updated: May 5, 2025</span><button class="text-verdant text-sm hover:underline">View in 3D →</button></div></div></div>
+                <div class="mockup-card border-dashed"><div class="mockup-thumb bg-verdant/20"><i class="fas fa-plus text-verdant text-3xl"></i></div><div class="mt-3 text-center"><p class="text-sm text-gray-500">Request a new 3D mockup for your next project phase</p><button class="btn-outline text-sm mt-2 w-full">Request New Mockup</button></div></div>
+            </div>
+        </div>
+
+        <!-- TRACK PLANT DELIVERY -->
+        <div id="page-delivery" class="page-content hidden">
+            <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">Plant Delivery Tracking</h3>
+                <div class="space-y-3">
+                    <div class="claim-card p-3 border-b border-verdant/20"><div class="flex flex-wrap justify-between items-start gap-2"><div><p class="font-bold">Order #VE-2451</p><p class="text-sm text-gray-500">Placed: May 8, 2025 • 5 items</p><p class="text-xs mt-1">Monstera Deliciosa, Fiddle Leaf Fig, Snake Plant, Calathea, ZZ Plant</p></div><span class="status-badge status-shipped">Shipped</span></div>
+                    <div class="mt-2"><div class="flex justify-between text-sm mb-1"><span>Delivery Progress</span><span>65%</span></div><div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div></div>
+                    <div class="flex justify-between text-sm text-gray-500 mt-2"><span><i class="fas fa-map-marker-alt text-verdant"></i> Current: Dallas, TX</span><span>ETA: June 12, 2025</span></div><button class="text-verdant text-sm mt-2"><i class="fas fa-sync-alt"></i> Track Live</button></div>
+                    <div class="claim-card p-3"><div class="flex flex-wrap justify-between items-start gap-2"><div><p class="font-bold">Order #VE-2389</p><p class="text-sm text-gray-500">Placed: April 25, 2025 • 3 items</p><p class="text-xs mt-1">Organic Potting Soil, Ceramic Pots (Set of 3), Plant Fertilizer</p></div><span class="status-badge status-delivered">Delivered</span></div><div class="mt-2 text-sm text-verdant"><i class="fas fa-check-circle"></i> Delivered on May 2, 2025</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLANT CARE SCHEDULES -->
+        <div id="page-care" class="page-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">📅 Weekly Care Schedule</h3>
+                    <div class="care-item flex justify-between items-center"><div><i class="fas fa-tint text-verdant mr-2"></i><span class="font-medium">Watering - Monstera</span></div><span class="text-xs text-gray-500">Every 3 days</span></div>
+                    <div class="care-item flex justify-between items-center"><div><i class="fas fa-tint text-verdant mr-2"></i><span class="font-medium">Watering - Fiddle Leaf</span></div><span class="text-xs text-gray-500">Once a week</span></div>
+                    <div class="care-item flex justify-between items-center"><div><i class="fas fa-spray-can text-verdant mr-2"></i><span class="font-medium">Misting - Calathea</span></div><span class="text-xs text-gray-500">Daily</span></div>
+                    <div class="care-item flex justify-between items-center"><div><i class="fas fa-seedling text-verdant mr-2"></i><span class="font-medium">Fertilize - All Plants</span></div><span class="text-xs text-gray-500">June 15, 2025</span></div>
+                    <div class="care-item flex justify-between items-center"><div><i class="fas fa-cut text-verdant mr-2"></i><span class="font-medium">Pruning - Snake Plant</span></div><span class="text-xs text-gray-500">Monthly</span></div>
+                </div>
+                <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">📱 Downloadable Care Guides</h3>
+                    <div class="space-y-3"><button class="w-full text-left px-4 py-2 bg-verdant/5 rounded-xl hover:bg-verdant/10 transition flex items-center gap-3"><i class="fas fa-file-pdf text-verdant"></i><span>Complete Plant Care Guide (PDF)</span><i class="fas fa-download ml-auto text-verdant"></i></button>
+                    <button class="w-full text-left px-4 py-2 bg-verdant/5 rounded-xl hover:bg-verdant/10 transition flex items-center gap-3"><i class="fas fa-calendar-alt text-verdant"></i><span>Seasonal Watering Calendar</span><i class="fas fa-download ml-auto text-verdant"></i></button>
+                    <button class="w-full text-left px-4 py-2 bg-verdant/5 rounded-xl hover:bg-verdant/10 transition flex items-center gap-3"><i class="fas fa-bug text-verdant"></i><span>Pest Prevention & Treatment Guide</span><i class="fas fa-download ml-auto text-verdant"></i></button></div>
+                    <div class="mt-4 p-3 bg-verdant/10 rounded-xl text-sm"><i class="fas fa-bell text-verdant mr-2"></i>Set care reminders to get SMS notifications for watering and fertilizing.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEASONAL MAINTENANCE -->
+        <div id="page-maintenance" class="page-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="stat-card lg:col-span-2"><h3 class="font-display font-bold text-xl mb-4">🍂 Seasonal Maintenance Services</h3>
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap justify-between items-center p-3 border-b border-verdant/20"><div><p class="font-semibold">Spring Cleanup & Mulching</p><p class="text-sm text-gray-500">Remove winter debris, fresh mulch, pruning</p></div><div class="flex gap-2"><span class="text-verdant font-bold">$249</span><button class="btn-outline text-sm py-1 px-3">Schedule</button></div></div>
+                        <div class="flex flex-wrap justify-between items-center p-3 border-b border-verdant/20"><div><p class="font-semibold">Summer Irrigation Check</p><p class="text-sm text-gray-500">System inspection, leak repair, timer adjustment</p></div><div class="flex gap-2"><span class="text-verdant font-bold">$149</span><button class="btn-outline text-sm py-1 px-3">Schedule</button></div></div>
+                        <div class="flex flex-wrap justify-between items-center p-3 border-b border-verdant/20"><div><p class="font-semibold">Fall Leaf Removal + Planting</p><p class="text-sm text-gray-500">Leaf cleanup, fall bulb planting, winter prep</p></div><div class="flex gap-2"><span class="text-verdant font-bold">$399</span><button class="btn-outline text-sm py-1 px-3">Schedule</button></div></div>
+                        <div class="flex flex-wrap justify-between items-center p-3"><div><p class="font-semibold">Winter Protection & Frost Prep</p><p class="text-sm text-gray-500">Mulch refresh, plant covers, pipe insulation</p></div><div class="flex gap-2"><span class="text-verdant font-bold">$179</span><button class="btn-outline text-sm py-1 px-3">Schedule</button></div></div>
+                    </div>
+                </div>
+                <div class="stat-card"><h3 class="font-display font-bold text-lg mb-3">📅 Upcoming Maintenance</h3>
+                    <div class="space-y-3"><div class="p-2 bg-verdant/5 rounded-xl"><p class="font-semibold">Spring Cleanup</p><p class="text-sm">Scheduled: June 20, 2025</p><span class="status-badge status-processing">Confirmed</span></div>
+                    <div class="p-2"><p class="font-semibold">Irrigation Check</p><p class="text-sm">Not scheduled - <span class="text-verdant cursor-pointer">Book now</span></p></div></div>
+                    <div class="mt-4 p-3 bg-verdant/10 rounded-xl"><i class="fas fa-tools text-verdant mr-2"></i><span class="text-sm">Subscribe to annual maintenance plan and save 20%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div id="page-settings" class="page-content hidden">
+            <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">Profile Settings</h3>
+                <div class="space-y-4"><div><label class="block text-sm font-medium mb-1">Full Name</label><input type="text" value="Sarah & Michael Thompson" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Phone Number</label><input type="tel" value="+1 (512) 555-1234" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Email Address</label><input type="email" value="sarah.thompson@verdant.com" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Property Address</label><input type="text" value="123 Garden Lane, Austin, TX 78701" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Notification Preferences</label><div class="space-y-2"><label class="flex items-center gap-2"><input type="checkbox" checked class="rounded text-verdant"> SMS reminders for consultations</label>
+                <label class="flex items-center gap-2"><input type="checkbox" checked class="rounded text-verdant"> Email updates on plant deliveries</label>
+                <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-verdant"> Weekly care tips & seasonal alerts</label></div></div>
+                <button class="btn-primary w-full md:w-auto">Save Changes</button></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            const themeToggleTop = document.getElementById('theme-toggle-top');
+            function setTheme(isDark) {
+                if (isDark) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+                [themeToggle, themeToggleMobile, themeToggleTop].forEach(btn => {
+                    if (btn) {
+                        let moon = btn.querySelector('.fa-moon'), sun = btn.querySelector('.fa-sun');
+                        if (isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+                        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+                    }
+                });
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+            const savedTheme = localStorage.getItem('theme');
+            setTheme(savedTheme === 'dark');
+            if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleTop) themeToggleTop.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+            // RTL
+            const rtlBtns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-desktop, #rtl-toggle-top');
+            function setRTL(isRTL) { document.documentElement.dir = isRTL ? 'rtl' : 'ltr'; localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr'); }
+            if (localStorage.getItem('dir') === 'rtl') setRTL(true);
+            rtlBtns.forEach(btn => btn?.addEventListener('click', () => setRTL(document.documentElement.dir !== 'rtl')));
+
+            // Mobile Sidebar
+            const menuToggle = document.getElementById('menuToggle'), sidebar = document.getElementById('sidebar'), overlay = document.getElementById('sidebarOverlay');
+            function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+            function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+            if (menuToggle) menuToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+            window.addEventListener('resize', () => { if (window.innerWidth > 768 && sidebar.classList.contains('open')) closeSidebar(); });
+
+            // Navigation
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const pages = document.querySelectorAll('.page-content');
+            const pageTitle = document.getElementById('page-title'), pageSubtitle = document.getElementById('page-subtitle');
+            const titles = {
+                dashboard: { title: 'Dashboard', subtitle: 'Welcome back, Sarah & Michael' },
+                consultations: { title: 'Schedule Consultations', subtitle: 'Book landscape design consultations with our experts' },
+                mockups: { title: '3D Landscape Mockups', subtitle: 'View and approve your garden designs' },
+                delivery: { title: 'Track Plant Delivery', subtitle: 'Monitor your plant orders in real-time' },
+                care: { title: 'Plant Care Schedules', subtitle: 'Personalized watering and maintenance guides' },
+                maintenance: { title: 'Seasonal Maintenance', subtitle: 'Schedule and manage garden services' },
+                settings: { title: 'Settings', subtitle: 'Update your profile and preferences' }
+            };
+            function navigateTo(page) {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                document.querySelector(`.sidebar-item[data-page="${page}"]`)?.classList.add('active');
+                pages.forEach(p => p.classList.add('hidden'));
+                document.getElementById(`page-${page}`)?.classList.remove('hidden');
+                if (titles[page]) { pageTitle.textContent = titles[page].title; pageSubtitle.textContent = titles[page].subtitle; }
+                closeSidebar();
+            }
+            sidebarItems.forEach(item => { item.addEventListener('click', () => { navigateTo(item.getAttribute('data-page')); }); });
+            document.querySelectorAll('[data-nav]').forEach(btn => { btn.addEventListener('click', () => { navigateTo(btn.getAttribute('data-nav')); }); });
+        });
+    </script>
+</body>
+
+</html>

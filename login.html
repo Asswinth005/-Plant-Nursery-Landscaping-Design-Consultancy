@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+    <title>Sign In · Verdant Essence | Plant Nursery & Landscape Consultancy</title>
+    <!-- Custom Favicon - Leaf Icon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🌿%3C/text%3E%3C/svg%3E">
+    <meta name="description"
+        content="Sign in to your Verdant Essence account. Access your plant orders, landscape consultations, and garden care plans.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'verdant': '#2F6B47',
+                        'verdant-dark': '#1F4A30',
+                        'verdant-light': '#4A9B6E',
+                        'verdant-glow': '#6ECB8F',
+                        'soil': '#8B6B4A',
+                        'leaf': '#85A65E',
+                        'canvas-light': '#F8F6F0',
+                        'canvas-dark': '#121212',
+                        'canvas-charcoal': '#1E1E1E',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'leaf-pattern': "radial-gradient(circle at 20% 30%, rgba(47,107,71,0.04) 0%, transparent 60%)",
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spinSlow 12s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                        spinSlow: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* NO SCROLL — fit exactly one screen */
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #F8F6F0;
+            color: #1E1E1E;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .dark body {
+            background-color: #121212;
+            color: #E8EDEE;
+        }
+
+        /* toggle buttons — positioned top-right */
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 1000;
+            display: flex;
+            gap: 6px;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 40px;
+            background: #F0F0F0;
+            color: #2F6B47;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dark .toggle-btn { background: #2A2A2A; color: #FFFFFF; }
+        .toggle-btn:hover { background: #2F6B47; color: white; transform: rotate(15deg); }
+
+        /* LOGIN CARD */
+        .login-card {
+            background: white;
+            border-radius: 36px;
+            padding: 2.2rem 2rem 2rem;
+            box-shadow: 0 20px 45px rgba(30,30,30,0.12);
+            border: 1px solid rgba(47,107,71,0.25);
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        .dark .login-card {
+            background: #1A1A1A;
+            border-color: #2A2A2A;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* input styling */
+        .login-input {
+            width: 100%;
+            padding: 0.85rem 1.2rem 0.85rem 3rem;
+            border-radius: 50px;
+            border: 1px solid #CFD5DB;
+            background: white;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            color: #1E1E1E;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .login-input {
+            background: #2A2A2A;
+            border-color: #4A4A4A;
+            color: #E8EDEE;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #2F6B47;
+            box-shadow: 0 0 0 3px rgba(47,107,71,0.25);
+        }
+
+        .dark .login-input:focus {
+            border-color: #4A9B6E;
+            box-shadow: 0 0 0 3px rgba(74,155,110,0.25);
+        }
+
+        /* password wrapper */
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper .login-input {
+            padding-right: 3rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #2F6B47;
+            font-size: 1rem;
+            transition: color 0.2s;
+            background: transparent;
+            border: none;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark .toggle-password {
+            color: #4A9B6E;
+        }
+
+        .toggle-password:hover {
+            color: #1F4A30;
+        }
+
+        [dir="rtl"] .toggle-password {
+            right: auto;
+            left: 1rem;
+        }
+
+        [dir="rtl"] .password-wrapper .login-input {
+            padding-right: 3rem;
+            padding-left: 3rem;
+        }
+
+        [dir="rtl"] .input-icon {
+            left: auto;
+            right: 0;
+            padding-left: 0;
+            padding-right: 1rem;
+        }
+
+        /* primary button */
+        .verdant-btn {
+            background: #2F6B47;
+            color: white;
+            font-weight: 700;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .verdant-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(47,107,71,0.4);
+            background: #1F4A30;
+        }
+
+        .dark .verdant-btn {
+            background: #4A9B6E;
+            color: #121212;
+        }
+
+        .dark .verdant-btn:hover {
+            background: #2F6B47;
+            color: white;
+        }
+
+        /* social login buttons */
+        .social-btn-row {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.8rem 0.5rem;
+            border-radius: 50px;
+            border: 1px solid #CFD5DB;
+            background: white;
+            color: #1E1E1E;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            gap: 0.5rem;
+            white-space: nowrap;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .social-btn {
+            background: #2A2A2A;
+            border-color: #4A4A4A;
+            color: #E8EDEE;
+        }
+
+        .social-btn:hover {
+            background: rgba(47,107,71,0.1);
+            border-color: #2F6B47;
+            transform: translateY(-2px);
+        }
+
+        .dark .social-btn:hover {
+            background: rgba(74,155,110,0.15);
+            border-color: #4A9B6E;
+        }
+
+        .social-btn i {
+            font-size: 1.1rem;
+            color: #2F6B47;
+        }
+
+        .dark .social-btn i {
+            color: #4A9B6E;
+        }
+
+        /* logo container */
+        .logo-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-logo {
+            background: #2F6B47;
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+            box-shadow: 0 4px 10px rgba(47,107,71,0.3);
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .brand-logo i {
+            color: white;
+        }
+
+        .dark .brand-logo i {
+            color: #121212;
+        }
+
+        .welcome-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1E1E1E;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .dark .welcome-title {
+            color: #E8EDEE;
+        }
+
+        .welcome-subtitle {
+            font-size: 0.9rem;
+            color: #64748B;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .welcome-subtitle {
+            color: #94A3B8;
+        }
+
+        /* RTL adjustments */
+        [dir="rtl"] .login-input {
+            padding: 0.85rem 3rem 0.85rem 1.2rem;
+        }
+
+        [dir="rtl"] .fa-arrow-right {
+            transform: scaleX(-1);
+        }
+
+        [dir="rtl"] .theme-toggle-wrapper {
+            right: auto;
+            left: 20px;
+        }
+
+        /* Fix for short screens */
+        @media (max-height: 650px) {
+            .login-card {
+                padding: 0.8rem 1.5rem;
+                transform: scale(0.95);
+                transform-origin: center;
+            }
+
+            .logo-center {
+                margin-bottom: 0.5rem;
+            }
+
+            .welcome-title {
+                font-size: 1.3rem;
+                margin-top: 0;
+            }
+
+            .welcome-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .login-input {
+                padding: 0.6rem 0.8rem 0.6rem 2.5rem;
+                font-size: 0.85rem;
+            }
+
+            .verdant-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+                margin-top: 0.25rem;
+            }
+
+            .theme-toggle-wrapper {
+                top: 8px;
+                right: 8px;
+            }
+
+            .toggle-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .login-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 24px;
+            }
+
+            .logo-center {
+                margin-bottom: 1rem;
+            }
+
+            .welcome-title {
+                font-size: 1.3rem;
+            }
+
+            .login-input {
+                padding: 0.7rem 1rem 0.7rem 2.8rem;
+                font-size: 0.85rem;
+            }
+
+            .verdant-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .theme-toggle-wrapper {
+                top: 12px;
+                right: 12px;
+            }
+
+            [dir="rtl"] .theme-toggle-wrapper {
+                left: 12px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .container-tight {
+            max-width: 480px;
+            width: 100%;
+            padding: 0 1.2rem;
+        }
+
+        .text-verdant {
+            color: #2F6B47;
+        }
+
+        a {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="leaf-pattern">
+
+    <!-- ===== THEME TOGGLES - TOP-RIGHT ===== -->
+    <div class="theme-toggle-wrapper flex items-center gap-3">
+        <button id="theme-toggle" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+        <button id="rtl-toggle" class="toggle-btn">⇄</button>
+    </div>
+
+    <!-- ===== LOGIN CARD ===== -->
+    <div class="container-tight">
+        <div class="login-card animate-fade-in">
+
+            <!-- ===== LOGO - CENTERED ===== -->
+            <div class="logo-center mb-8">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="bg-white dark:bg-[#1A1A1A] px-5 py-2 rounded-full flex items-center shadow-md border border-gray-200 dark:border-[#2A2A2A] transform group-hover:scale-105 transition-transform">
+                        <span class="text-2xl font-display font-bold text-verdant">Verdant</span><span class="text-2xl font-display font-bold text-gray-900 dark:text-white">Essence</span>
+                    </div>
+                </a>
+
+                <h1 class="welcome-title mt-4">Welcome Back</h1>
+                <p class="welcome-subtitle">Sign in to access your plant orders & landscape consultations</p>
+            </div>
+
+            <!-- ===== LOGIN FORM ===== -->
+            <form id="loginForm" class="space-y-5" action="#" method="GET">
+
+                <!-- email field -->
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-verdant input-icon">
+                        <i class="fas fa-envelope w-5 text-sm"></i>
+                    </span>
+                    <input type="email" name="email" id="login-email" placeholder="Email address" required
+                        class="login-input text-sm md:text-base">
+                </div>
+
+                <!-- password field with eye icon -->
+                <div class="password-wrapper">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-verdant input-icon">
+                        <i class="fas fa-lock w-5 text-sm"></i>
+                    </span>
+                    <input type="password" id="login-password" name="password" placeholder="Password" required
+                        class="login-input text-sm md:text-base">
+                    <button type="button" class="toggle-password" data-target="login-password"
+                        aria-label="Show password">
+                        <i class="far fa-eye-slash"></i>
+                    </button>
+                </div>
+
+                <!-- remember + forgot -->
+                <div class="flex items-center justify-between text-xs md:text-sm">
+                    <label class="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer text-gray-700 dark:text-gray-300">
+                        <input type="checkbox"
+                            class="rounded border-gray-300 dark:border-gray-600 text-verdant focus:ring-verdant/30 dark:bg-gray-700"
+                            checked>
+                        <span class="ml-1 rtl:mr-1">Remember me</span>
+                    </label>
+                    <a href="#" id="forgotPasswordLink" dir="ltr"
+                        class="text-verdant dark:text-verdant-light hover:text-verdant-dark font-medium transition hover:underline inline-block">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="verdant-btn mt-3">
+                    Sign In
+                </button>
+
+                <!-- divider -->
+                <div class="relative my-4">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                    </div>
+                    <div class="relative justify-center flex text-xs">
+                        <span class="bg-white dark:bg-[#1A1A1A] px-4 py-0.5 text-gray-500 dark:text-gray-400 rounded-full">
+                            or continue with
+                        </span>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- ===== SOCIAL LOGIN BUTTONS ===== -->
+            <div class="mt-6">
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="social-btn group w-full flex items-center justify-center gap-2 py-3 px-2 text-sm"
+                        onclick="socialLogin('google')">
+                        <i class="fab fa-google text-base"></i>
+                        <span>Google</span>
+                    </button>
+                    <button class="social-btn group w-full flex items-center justify-center gap-2 py-3 px-2 text-sm"
+                        onclick="socialLogin('apple')">
+                        <i class="fab fa-apple text-base"></i>
+                        <span>Apple</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== "NOT A MEMBER? SIGN UP" LINK ===== -->
+            <div class="text-center mt-6 pt-4 border-t border-dashed border-gray-200 dark:border-gray-700/40" dir="ltr">
+                <span class="text-gray-700 dark:text-gray-300 text-sm md:text-base">New to Verdant Essence?</span>
+                <a href="signup.html"
+                    class="inline-flex items-center text-verdant dark:text-verdant-light font-semibold hover:text-verdant-dark transition hover:underline text-sm md:text-base ml-1">
+                    Create an account
+                    <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </a>
+            </div>
+
+           
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+            (function () {
+                // ---------- THEME TOGGLE ----------
+                const themeToggle = document.getElementById('theme-toggle');
+
+                function setTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+
+                    const icon = themeToggle?.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-sun', 'fa-moon');
+                        icon.classList.add(isDark ? 'fa-moon' : 'fa-sun');
+                    }
+
+                    if (isDark) {
+                        themeToggle?.classList.add('active');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        themeToggle?.classList.remove('active');
+                        localStorage.setItem('theme', 'light');
+                    }
+                }
+
+                // Check for saved theme or system preference
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    setTheme(true);
+                } else if (savedTheme === 'light') {
+                    setTheme(false);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    setTheme(true);
+                } else {
+                    setTheme(false);
+                }
+
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        setTheme(!document.documentElement.classList.contains('dark'));
+                    });
+                }
+
+                // ---------- RTL TOGGLE ----------
+                const rtlBtn = document.getElementById('rtl-toggle');
+
+                function setRTL(isRTL) {
+                    if (isRTL) {
+                        document.documentElement.dir = 'rtl';
+                        document.documentElement.lang = 'ar';
+                        rtlBtn?.classList.add('active');
+                        localStorage.setItem('dir', 'rtl');
+                    } else {
+                        document.documentElement.dir = 'ltr';
+                        document.documentElement.lang = 'en';
+                        rtlBtn?.classList.remove('active');
+                        localStorage.setItem('dir', 'ltr');
+                    }
+                }
+                const savedDir = localStorage.getItem('dir');
+                savedDir === 'rtl' ? setRTL(true) : setRTL(false);
+
+                if (rtlBtn) {
+                    rtlBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        setRTL(document.documentElement.dir !== 'rtl');
+                    });
+                }
+
+                // ---------- EYE ICON TOGGLE PASSWORD VISIBILITY ----------
+                const toggleButtons = document.querySelectorAll('.toggle-password');
+                toggleButtons.forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('data-target');
+                        const passwordInput = document.getElementById(targetId);
+                        if (passwordInput) {
+                            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', type);
+                            const icon = this.querySelector('i');
+                            if (icon) {
+                                if (type === 'text') {
+                                    icon.classList.remove('fa-eye-slash');
+                                    icon.classList.add('fa-eye');
+                                } else {
+                                    icon.classList.remove('fa-eye');
+                                    icon.classList.add('fa-eye-slash');
+                                }
+                            }
+                        }
+                    });
+                });
+
+                // ---------- FORGOT PASSWORD HANDLER ----------
+                const forgotLink = document.getElementById('forgotPasswordLink');
+                if (forgotLink) {
+                    forgotLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        alert('🌿 Password reset link will be sent to your email. Check your inbox!');
+                    });
+                }
+
+                // ---------- LOGIN FORM SUBMIT ----------
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        const email = document.getElementById('login-email')?.value;
+                        const password = document.getElementById('login-password')?.value;
+
+                        if (!email || !password) {
+                            alert('Please enter both email and password');
+                            return;
+                        }
+
+                        // Redirect to dashboard after successful login
+                        window.location.href = 'index.html';
+                    });
+                }
+
+                // ---------- SOCIAL LOGIN HANDLER ----------
+                window.socialLogin = function (provider) {
+                    alert(`🌱 ${provider.charAt(0).toUpperCase() + provider.slice(1)} login would be implemented here.\n\nWelcome to Verdant Essence — access your plant orders and garden consultations!`);
+                };
+            })();
+    </script>
+</body>
+
+</html>
