@@ -173,7 +173,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
+         justify-content: center; }
         .btn-primary:hover { background: #1F4A30; transform: scale(1.03); }
         .btn-outline {
             border: 2px solid #2F6B47;
@@ -183,6 +183,9 @@
             border-radius: 60px;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-outline:hover { background: #2F6B47; color: white; }
 
@@ -554,9 +557,9 @@
                 <h2 class="text-4xl md:text-5xl font-display font-bold mt-2">What Our <span class="text-verdant">Clients Say</span></h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-canvas-light dark:bg-canvas-dark/30 p-6 rounded-2xl"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"The team transformed our barren backyard into a native paradise. Every detail was thoughtfully executed."</p><div class="mt-4"><p class="font-bold">Sarah & Michael</p><p class="text-sm text-verdant">Austin, TX</p></div></div>
-                <div class="bg-canvas-light dark:bg-canvas-dark/30 p-6 rounded-2xl"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"Our corporate campus now feels alive. Employees love the outdoor spaces and native plantings."</p><div class="mt-4"><p class="font-bold">James Chen</p><p class="text-sm text-verdant">TechCorp Facilities</p></div></div>
-                <div class="bg-canvas-light dark:bg-canvas-dark/30 p-6 rounded-2xl"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"From design to installation, Verdant Essence exceeded our expectations. Our garden is a masterpiece."</p><div class="mt-4"><p class="font-bold">Elena Rodriguez</p><p class="text-sm text-verdant">Hillside Resident</p></div></div>
+                <div class="bg-canvas-light dark:bg-canvas-dark/30 p-6 rounded-2xl flex flex-col h-full"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"The team transformed our barren backyard into a native paradise. Every detail was thoughtfully executed."</p><div class="mt-auto pt-4"><p class="font-bold">Sarah & Michael</p><p class="text-sm text-verdant">Austin, TX</p></div></div>
+                <div class="bg-canvas-light dark:bg-canvas-dark/30 p-6 rounded-2xl flex flex-col h-full"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"Our corporate campus now feels alive. Employees love the outdoor spaces and native plantings."</p><div class="mt-auto pt-4"><p class="font-bold">James Chen</p><p class="text-sm text-verdant">TechCorp Facilities</p></div></div>
+                <div class="bg-canvas-light dark:bg-canvas-dark/30 p-6 rounded-2xl flex flex-col h-full"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"From design to installation, Verdant Essence exceeded our expectations. Our garden is a masterpiece."</p><div class="mt-auto pt-4"><p class="font-bold">Elena Rodriguez</p><p class="text-sm text-verdant">Hillside Resident</p></div></div>
             </div>
         </div>
     </section>

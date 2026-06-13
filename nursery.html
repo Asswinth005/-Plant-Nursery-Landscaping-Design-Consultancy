@@ -173,7 +173,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
+         justify-content: center; }
         .btn-primary:hover { background: #1F4A30; transform: scale(1.03); }
         .btn-outline {
             border: 2px solid #2F6B47;
@@ -183,6 +183,9 @@
             border-radius: 60px;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-outline:hover { background: #2F6B47; color: white; }
 
@@ -504,13 +507,13 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Plant Card 1 -->
-                        <div data-categories="Indoor Plants Rare Collection" data-price="76" data-light="Bright Indirect" data-size="Large" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
+                        <div data-categories="Indoor Plants Rare Collection" data-price="76" data-light="Bright Indirect" data-size="Large" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-emerald-800 to-verdant-dark">
                                 <img src="assets/nursery_fiddle_leaf.png" alt="Fiddle Leaf Fig" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                                 <div class="absolute top-3 left-3 badge-sale text-white text-xs font-bold px-2 py-1 rounded-full">-15%</div>
                                 <button class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdant hover:text-white transition wishlist-btn"><i class="far fa-heart"></i></button>
                             </div>
-                            <div class="p-4">
+                            <div class="p-4 flex flex-col flex-1">
                                 <div class="flex justify-between items-start mb-2">
                                     <div>
                                         <p class="text-gray-400 dark:text-gray-500 text-xs font-mono">Indoor Tree</p>
@@ -518,7 +521,7 @@
                                     </div>
                                     <div class="flex gap-1 text-amber-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
-                                <div class="flex items-center justify-between mt-3">
+                                <div class="flex items-center justify-between mt-auto pt-3">
                                     <div><span class="text-verdant font-bold text-xl">$76</span><span class="text-gray-400 text-sm line-through ml-2">$89</span></div>
                                     <button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button>
                                 </div>
@@ -526,68 +529,68 @@
                         </div>
 
                         <!-- Plant Card 2 -->
-                        <div data-categories="Indoor Plants" data-price="65" data-light="Medium Light" data-size="Medium" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
+                        <div data-categories="Indoor Plants" data-price="65" data-light="Medium Light" data-size="Medium" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-teal-800 to-verdant">
                                 <img src="assets/nursery_monstera.png" alt="Monstera" class="w-full h-full object-cover">
                                 <div class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full">Trending</div>
                                 <button class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdant hover:text-white transition wishlist-btn"><i class="far fa-heart"></i></button>
                             </div>
-                            <div class="p-4">
+                            <div class="p-4 flex flex-col flex-1">
                                 <div class="flex justify-between items-start mb-2">
                                     <div><p class="text-gray-400 dark:text-gray-500 text-xs font-mono">Swiss Cheese</p><h3 class="font-display font-bold text-lg">Monstera Deliciosa</h3></div>
                                     <div class="flex gap-1 text-amber-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
                                 </div>
-                                <div class="flex items-center justify-between mt-3"><div><span class="text-verdant font-bold text-xl">$65</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
+                                <div class="flex items-center justify-between mt-auto pt-3"><div><span class="text-verdant font-bold text-xl">$65</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
                             </div>
                         </div>
 
                         <!-- Plant Card 3 -->
-                        <div data-categories="Indoor Plants Succulents" data-price="45" data-light="Low Light" data-size="Medium" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
+                        <div data-categories="Indoor Plants Succulents" data-price="45" data-light="Low Light" data-size="Medium" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-amber-700 to-soil">
                                 <img src="assets/nursery_snake_plant.png" alt="Snake Plant" class="w-full h-full object-cover">
                                 <div class="absolute top-3 left-3 bg-verdant text-white text-xs font-bold px-2 py-1 rounded-full">Air Purifier</div>
                                 <button class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdant hover:text-white transition wishlist-btn"><i class="far fa-heart"></i></button>
                             </div>
-                            <div class="p-4">
+                            <div class="p-4 flex flex-col flex-1">
                                 <div class="flex justify-between items-start mb-2"><div><p class="text-gray-400 dark:text-gray-500 text-xs font-mono">Snake Plant</p><h3 class="font-display font-bold text-lg">Sansevieria</h3></div><div class="flex gap-1 text-amber-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div>
-                                <div class="flex items-center justify-between mt-3"><div><span class="text-verdant font-bold text-xl">$45</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
+                                <div class="flex items-center justify-between mt-auto pt-3"><div><span class="text-verdant font-bold text-xl">$45</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
                             </div>
                         </div>
 
                         <!-- Plant Card 4 -->
-                        <div data-categories="Indoor Plants Rare Collection" data-price="76" data-light="Bright Indirect" data-size="Large" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
+                        <div data-categories="Indoor Plants Rare Collection" data-price="76" data-light="Bright Indirect" data-size="Large" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-purple-800 to-verdant-light">
                                 <img src="assets/nursery_calathea.png" alt="Calathea" class="w-full h-full object-cover">
                                 <button class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdant hover:text-white transition wishlist-btn"><i class="far fa-heart"></i></button>
                             </div>
-                            <div class="p-4">
+                            <div class="p-4 flex flex-col flex-1">
                                 <div class="flex justify-between items-start mb-2"><div><p class="text-gray-400 dark:text-gray-500 text-xs font-mono">Prayer Plant</p><h3 class="font-display font-bold text-lg">Calathea Orbifolia</h3></div><div class="flex gap-1 text-amber-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
-                                <div class="flex items-center justify-between mt-3"><div><span class="text-verdant font-bold text-xl">$55</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
+                                <div class="flex items-center justify-between mt-auto pt-3"><div><span class="text-verdant font-bold text-xl">$55</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
                             </div>
                         </div>
 
                         <!-- Plant Card 5 -->
-                        <div data-categories="Indoor Plants" data-price="48" data-light="Low Light" data-size="Medium" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
+                        <div data-categories="Indoor Plants" data-price="48" data-light="Low Light" data-size="Medium" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-rose-700 to-verdant">
                                 <img src="assets/nursery_zz_plant.png" alt="ZZ Plant" class="w-full h-full object-cover">
                                 <div class="absolute top-3 left-3 badge-sale text-white text-xs font-bold px-2 py-1 rounded-full">-20%</div>
                                 <button class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdant hover:text-white transition wishlist-btn"><i class="far fa-heart"></i></button>
                             </div>
-                            <div class="p-4">
+                            <div class="p-4 flex flex-col flex-1">
                                 <div class="flex justify-between items-start mb-2"><div><p class="text-gray-400 dark:text-gray-500 text-xs font-mono">Low Maintenance</p><h3 class="font-display font-bold text-lg">ZZ Plant</h3></div><div class="flex gap-1 text-amber-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
-                                <div class="flex items-center justify-between mt-3"><div><span class="text-verdant font-bold text-xl">$48</span><span class="text-gray-400 text-sm line-through ml-2">$60</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
+                                <div class="flex items-center justify-between mt-auto pt-3"><div><span class="text-verdant font-bold text-xl">$48</span><span class="text-gray-400 text-sm line-through ml-2">$60</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
                             </div>
                         </div>
 
                         <!-- Plant Card 6 -->
-                        <div data-categories="Indoor Plants" data-price="28" data-light="Low Light" data-size="Small" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800">
+                        <div data-categories="Indoor Plants" data-price="28" data-light="Low Light" data-size="Small" data-pet="false" class="plant-product-card bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                             <div class="relative h-56 overflow-hidden bg-gradient-to-br from-emerald-600 to-verdant-dark">
                                 <img src="assets/nursery_pothos.png" alt="Pothos" class="w-full h-full object-cover">
                                 <button class="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdant hover:text-white transition wishlist-btn"><i class="far fa-heart"></i></button>
                             </div>
-                            <div class="p-4">
+                            <div class="p-4 flex flex-col flex-1">
                                 <div class="flex justify-between items-start mb-2"><div><p class="text-gray-400 dark:text-gray-500 text-xs font-mono">Trailing Vine</p><h3 class="font-display font-bold text-lg">Golden Pothos</h3></div><div class="flex gap-1 text-amber-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div>
-                                <div class="flex items-center justify-between mt-3"><div><span class="text-verdant font-bold text-xl">$28</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
+                                <div class="flex items-center justify-between mt-auto pt-3"><div><span class="text-verdant font-bold text-xl">$28</span></div><button class="add-to-cart-btn bg-verdant/10 hover:bg-verdant text-verdant hover:text-white px-4 py-2 rounded-full text-sm font-medium transition flex items-center gap-2"><i class="fas fa-shopping-cart"></i> Add</button></div>
                             </div>
                         </div>
                     </div>

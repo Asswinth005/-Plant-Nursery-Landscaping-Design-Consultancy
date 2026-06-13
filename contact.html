@@ -173,7 +173,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
+         justify-content: center; }
         .btn-primary:hover { background: #1F4A30; transform: scale(1.03); }
         .btn-outline {
             border: 2px solid #2F6B47;
@@ -183,6 +183,9 @@
             border-radius: 60px;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-outline:hover { background: #2F6B47; color: white; }
 
@@ -431,7 +434,7 @@
                 <!-- Contact Form -->
                 <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800">
                     <h2 class="text-2xl md:text-3xl font-display font-bold mb-2">Send us a <span class="text-verdant">Message</span></h2>
-                    <p class="text-gray-500 text-sm mb-6">Fill out the form below and we'll get back to you shortly.</p>
+                    <p class="text-gray-500 text-sm mb-6 mt-auto">Fill out the form below and we'll get back to you shortly.</p>
                     <form id="contactForm" class="space-y-5">
                         <div class="grid md:grid-cols-2 gap-4">
                             <div><input type="text" placeholder="Your Name *" class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-verdant outline-none transition"></div>
@@ -456,7 +459,7 @@
                         <div class="h-64 bg-verdant/10 relative">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1x3449.215428467754!2d-97.74333168487663!3d30.267635981814792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a2c2cf8d%3A0x8b8e5c7d5b2b5b2b!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale-[20%] hover:grayscale-0 transition duration-500"></iframe>
                         </div>
-                        <div class="p-5">
+                        <div class="p-5 flex flex-col flex-1">
                             <div class="flex items-center gap-3 mb-3"><i class="fas fa-clock text-verdant"></i><h3 class="font-bold text-lg">Nursery Hours</h3></div>
                             <div class="space-y-2">
                                 <div class="hours-item flex justify-between py-2"><span class="text-gray-600 dark:text-gray-400">Monday - Friday</span><span class="font-medium">9:00 AM - 6:00 PM</span></div>
@@ -473,7 +476,7 @@
                             <a href="#" class="w-12 h-12 bg-verdant/10 rounded-full flex items-center justify-center hover:bg-verdant hover:text-white transition text-verdant"><i class="fab fa-instagram text-xl"></i></a>
                             <a href="#" class="w-12 h-12 bg-verdant/10 rounded-full flex items-center justify-center hover:bg-verdant hover:text-white transition text-verdant"><i class="fab fa-facebook-f text-xl"></i></a>
                             <a href="#" class="w-12 h-12 bg-verdant/10 rounded-full flex items-center justify-center hover:bg-verdant hover:text-white transition text-verdant"><i class="fab fa-youtube text-xl"></i></a>
-                            <a href="#" class="w-12 h-12 bg-verdant/10 rounded-full flex items-center justify-center hover:bg-verdant hover:text-white transition text-verdant"><i class="fab fa-tiktok text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 bg-verdant/10 rounded-full flex items-center justify-center hover:bg-verdant hover:text-white transition text-verdant"><i class="fab fa-linkedin text-xl"></i></a>
                         </div>
                         <p class="text-gray-500 text-sm mt-4">Follow us for daily plant inspiration, care tips, and exclusive offers.</p>
                     </div>

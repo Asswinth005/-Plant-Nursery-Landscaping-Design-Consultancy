@@ -169,7 +169,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
+         justify-content: center; }
         .btn-primary:hover { background: #1F4A30; transform: scale(1.03); }
         .btn-outline {
             border: 2px solid #2F6B47;
@@ -179,6 +179,9 @@
             border-radius: 60px;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-outline:hover { background: #2F6B47; color: white; }
 
@@ -434,7 +437,7 @@
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                     <img src="assets/service_design.png" alt="Landscape Design" class="w-full h-48 object-cover rounded-xl mb-5">
                     <h3 class="text-2xl font-display font-bold mb-2">Landscape Design</h3>
                     <p class="text-gray-500 text-sm mb-4">Custom garden layouts, 3D renderings, plant selection, and hardscape planning.</p>
@@ -443,10 +446,10 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Concept development & mood boards</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Construction documentation</li>
                     </ul>
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $799</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $799</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
                 </div>
                 <!-- Service 2 -->
-                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                     <img src="assets/service_installation.png" alt="Installation" class="w-full h-48 object-cover rounded-xl mb-5">
                     <h3 class="text-2xl font-display font-bold mb-2">Installation</h3>
                     <p class="text-gray-500 text-sm mb-4">Professional planting, hardscape construction, and project management.</p>
@@ -455,10 +458,10 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Paver patios & walkways</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Retaining walls & edging</li>
                     </ul>
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">Custom Quote</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">Custom Quote</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
                 </div>
                 <!-- Service 3 -->
-                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                     <img src="assets/service_health_care.png" alt="Plant Health Care" class="w-full h-48 object-cover rounded-xl mb-5">
                     <h3 class="text-2xl font-display font-bold mb-2">Plant Health Care</h3>
                     <p class="text-gray-500 text-sm mb-4">Ongoing maintenance, disease treatment, and soil optimization.</p>
@@ -467,10 +470,10 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Pest & disease management</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Soil testing & amendment</li>
                     </ul>
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $149/month</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $149/month</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
                 </div>
                 <!-- Service 4 -->
-                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                     <img src="assets/service_irrigation.png" alt="Irrigation Systems" class="w-full h-48 object-cover rounded-xl mb-5">
                     <h3 class="text-2xl font-display font-bold mb-2">Irrigation Systems</h3>
                     <p class="text-gray-500 text-sm mb-4">Smart watering solutions, drip irrigation, and drainage systems.</p>
@@ -479,10 +482,10 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Drip irrigation for gardens</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> French drains & grading</li>
                     </ul>
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $499</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $499</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
                 </div>
                 <!-- Service 5 -->
-                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                     <img src="assets/service_maintenance.png" alt="Seasonal Maintenance" class="w-full h-48 object-cover rounded-xl mb-5">
                     <h3 class="text-2xl font-display font-bold mb-2">Seasonal Maintenance</h3>
                     <p class="text-gray-500 text-sm mb-4">Year-round care including cleanup, mulching, and winterization.</p>
@@ -491,10 +494,10 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Mulching & composting</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Leaf removal & snow prep</li>
                     </ul>
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $99/visit</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">From $99/visit</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
                 </div>
                 <!-- Service 6 -->
-                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
+                <div class="service-card-large bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-col h-full">
                     <img src="assets/service_coaching.png" alt="Garden Coaching" class="w-full h-48 object-cover rounded-xl mb-5">
                     <h3 class="text-2xl font-display font-bold mb-2">Garden Coaching</h3>
                     <p class="text-gray-500 text-sm mb-4">Personalized guidance for DIY gardeners and new plant parents.</p>
@@ -503,7 +506,7 @@
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Plant care education</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-verdant text-xs"></i> Seasonal planning assistance</li>
                     </ul>
-                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">$79/session</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
+                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700"><span class="text-verdant font-bold">$79/session</span><button class="float-right text-sm text-verdant hover:underline">Learn more →</button></div>
                 </div>
             </div>
         </div>
@@ -533,7 +536,7 @@
                 <h2 class="text-4xl md:text-5xl font-display font-bold mt-3">Service <span class="text-verdant">Plans</span></h2>
             </div>
             <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="pricing-tier bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700">
+                <div class="pricing-tier bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700 flex flex-col h-full">
                     <h3 class="text-xl font-bold mb-2">Essential Care</h3>
                     <div class="text-3xl font-display font-bold text-verdant mb-4">$149<span class="text-sm text-gray-500">/month</span></div>
                     <ul class="space-y-2 text-sm text-left mb-6">
@@ -542,9 +545,9 @@
                         <li><i class="fas fa-check text-verdant mr-2"></i> Mulching (2x/year)</li>
                         <li><i class="fas fa-check text-verdant mr-2"></i> Seasonal cleanups</li>
                     </ul>
-                    <button class="w-full btn-outline text-sm py-2">Select Plan</button>
+                    <button class="w-full btn-outline text-sm py-2 mt-auto">Select Plan</button>
                 </div>
-                <div class="pricing-tier bg-verdant/5 dark:bg-verdant/10 rounded-2xl p-6 text-center border-2 border-verdant relative">
+                <div class="pricing-tier bg-verdant/5 dark:bg-verdant/10 rounded-2xl p-6 text-center border-2 border-verdant relative flex flex-col h-full">
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-verdant text-white text-xs px-3 py-1 rounded-full">Most Popular</div>
                     <h3 class="text-xl font-bold mb-2">Premium Care</h3>
                     <div class="text-3xl font-display font-bold text-verdant mb-4">$299<span class="text-sm text-gray-500">/month</span></div>
@@ -555,9 +558,9 @@
                         <li><i class="fas fa-check text-verdant mr-2"></i> Pest monitoring & treatment</li>
                         <li><i class="fas fa-check text-verdant mr-2"></i> Seasonal color rotation</li>
                     </ul>
-                    <button class="w-full btn-primary text-sm py-2">Select Plan</button>
+                    <button class="w-full btn-primary text-sm py-2 mt-auto">Select Plan</button>
                 </div>
-                <div class="pricing-tier bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700">
+                <div class="pricing-tier bg-canvas-light dark:bg-canvas-dark/30 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700 flex flex-col h-full">
                     <h3 class="text-xl font-bold mb-2">Custom Design</h3>
                     <div class="text-3xl font-display font-bold text-verdant mb-4">Custom</div>
                     <ul class="space-y-2 text-sm text-left mb-6">
@@ -567,7 +570,7 @@
                         <li><i class="fas fa-check text-verdant mr-2"></i> Hardscape integration</li>
                         <li><i class="fas fa-check text-verdant mr-2"></i> 1-year maintenance plan</li>
                     </ul>
-                    <button class="w-full btn-outline text-sm py-2">Get Quote</button>
+                    <button class="w-full btn-outline text-sm py-2 mt-auto">Get Quote</button>
                 </div>
             </div>
         </div>
@@ -581,9 +584,9 @@
                 <h2 class="text-4xl md:text-5xl font-display font-bold mt-3">What <span class="text-verdant">Clients Say</span></h2>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"The maintenance team keeps our garden looking pristine year-round. Worth every penny."</p><div class="mt-4 flex items-center gap-3"><div class="w-10 h-10 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user text-verdant"></i></div><div><p class="font-semibold text-sm">Robert K.</p><p class="text-xs text-gray-400">Westlake Hills</p></div></div></div>
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"They designed and installed our dream garden. The process was seamless and professional."</p><div class="mt-4 flex items-center gap-3"><div class="w-10 h-10 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user text-verdant"></i></div><div><p class="font-semibold text-sm">Lisa M.</p><p class="text-xs text-gray-400">Downtown Austin</p></div></div></div>
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"The irrigation system they installed cut our water bill by 40%. Highly recommend!"</p><div class="mt-4 flex items-center gap-3"><div class="w-10 h-10 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user text-verdant"></i></div><div><p class="font-semibold text-sm">David T.</p><p class="text-xs text-gray-400">Bee Cave</p></div></div></div>
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm flex flex-col h-full"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"The maintenance team keeps our garden looking pristine year-round. Worth every penny."</p><div class="mt-auto pt-4 flex items-center gap-3"><div class="w-10 h-10 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user text-verdant"></i></div><div><p class="font-semibold text-sm">Robert K.</p><p class="text-xs text-gray-400">Westlake Hills</p></div></div></div>
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm flex flex-col h-full"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"They designed and installed our dream garden. The process was seamless and professional."</p><div class="mt-auto pt-4 flex items-center gap-3"><div class="w-10 h-10 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user text-verdant"></i></div><div><p class="font-semibold text-sm">Lisa M.</p><p class="text-xs text-gray-400">Downtown Austin</p></div></div></div>
+                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm flex flex-col h-full"><i class="fas fa-quote-left text-verdant/30 text-2xl mb-3"></i><p class="text-gray-600 dark:text-gray-300 italic">"The irrigation system they installed cut our water bill by 40%. Highly recommend!"</p><div class="mt-auto pt-4 flex items-center gap-3"><div class="w-10 h-10 bg-verdant/20 rounded-full flex items-center justify-center"><i class="fas fa-user text-verdant"></i></div><div><p class="font-semibold text-sm">David T.</p><p class="text-xs text-gray-400">Bee Cave</p></div></div></div>
             </div>
         </div>
     </section>

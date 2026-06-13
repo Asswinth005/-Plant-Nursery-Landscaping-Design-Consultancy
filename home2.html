@@ -173,7 +173,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
+         justify-content: center; }
         .btn-primary:hover { background: #1F4A30; transform: scale(1.03); }
         .btn-outline {
             border: 2px solid #2F6B47;
@@ -183,6 +183,9 @@
             border-radius: 60px;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-outline:hover { background: #2F6B47; color: white; }
 
@@ -431,10 +434,10 @@
                 <p class="text-gray-500 dark:text-gray-400 mt-4">Integrated design, rare plants, and regenerative practices.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-drafting-compass text-3xl text-verdant group-hover:text-white transition-colors"></i></div><h3 class="text-xl font-bold mb-2">Landscape Architecture</h3><p class="text-gray-500 text-sm">3D renderings, native planting schemes, and hardscape design.</p></div>
-                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-seedling text-3xl text-verdant group-hover:text-white"></i></div><h3 class="text-xl font-bold mb-2">Botanical Nursery</h3><p class="text-gray-500 text-sm">Curated indoor/outdoor plants, organic soil, and rare cultivars.</p></div>
-                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-tint text-3xl text-verdant group-hover:text-white"></i></div><h3 class="text-xl font-bold mb-2">Waterwise Systems</h3><p class="text-gray-500 text-sm">Smart irrigation, rainwater harvesting, drought-tolerant designs.</p></div>
-                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-hand-sparkles text-3xl text-verdant group-hover:text-white"></i></div><h3 class="text-xl font-bold mb-2">Seasonal Care</h3><p class="text-gray-500 text-sm">Pruning, fertilization, pest management & plant health monitoring.</p></div>
+                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all flex flex-col h-full"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-drafting-compass text-3xl text-verdant group-hover:text-white transition-colors"></i></div><h3 class="text-xl font-bold mb-2">Landscape Architecture</h3><p class="text-gray-500 text-sm mt-auto">3D renderings, native planting schemes, and hardscape design.</p></div>
+                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all flex flex-col h-full"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-seedling text-3xl text-verdant group-hover:text-white"></i></div><h3 class="text-xl font-bold mb-2">Botanical Nursery</h3><p class="text-gray-500 text-sm mt-auto">Curated indoor/outdoor plants, organic soil, and rare cultivars.</p></div>
+                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all flex flex-col h-full"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-tint text-3xl text-verdant group-hover:text-white"></i></div><h3 class="text-xl font-bold mb-2">Waterwise Systems</h3><p class="text-gray-500 text-sm mt-auto">Smart irrigation, rainwater harvesting, drought-tolerant designs.</p></div>
+                <div class="text-center group hover-lift p-6 rounded-2xl bg-canvas-light dark:bg-canvas-dark/30 transition-all flex flex-col h-full"><div class="w-20 h-20 mx-auto bg-verdant/10 rounded-full flex items-center justify-center mb-5 group-hover:bg-verdant transition-colors"><i class="fas fa-hand-sparkles text-3xl text-verdant group-hover:text-white"></i></div><h3 class="text-xl font-bold mb-2">Seasonal Care</h3><p class="text-gray-500 text-sm mt-auto">Pruning, fertilization, pest management & plant health monitoring.</p></div>
             </div>
         </div>
     </section>
@@ -447,9 +450,9 @@
                 <button class="btn-outline text-sm flex items-center gap-2">View All <i class="fas fa-arrow-right"></i></button>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-                <div class="rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all group"><div class="h-64 overflow-hidden bg-verdant"><img src="assets/japanese_garden.png" alt="Japanese Garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"></div><div class="p-5"><div class="flex justify-between"><div><h3 class="font-bold text-xl">Zen Sanctuary</h3><p class="text-gray-500 text-sm">Japanese Maples + Koi Pond</p></div><span class="text-verdant font-mono text-sm">2025</span></div></div></div>
-                <div class="rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all group"><div class="h-64 overflow-hidden bg-verdant-light"><img src="assets/vertical_garden.png" alt="Vertical Garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"></div><div class="p-5"><div class="flex justify-between"><div><h3 class="font-bold text-xl">Urban Oasis</h3><p class="text-gray-500 text-sm">Living Wall + Rooftop Terrace</p></div><span class="text-verdant font-mono text-sm">2025</span></div></div></div>
-                <div class="rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all group"><div class="h-64 overflow-hidden bg-soil"><img src="assets/mediterranean_garden.png" alt="Mediterranean Garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"></div><div class="p-5"><div class="flex justify-between"><div><h3 class="font-bold text-xl">Mediterranean Retreat</h3><p class="text-gray-500 text-sm">Lavender, Olive Trees, Gravel Paths</p></div><span class="text-verdant font-mono text-sm">2024</span></div></div></div>
+                <div class="rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all group flex flex-col h-full"><div class="h-64 overflow-hidden bg-verdant"><img src="assets/japanese_garden.png" alt="Japanese Garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"></div><div class="p-5 flex flex-col flex-1"><div class="flex justify-between"><div><h3 class="font-bold text-xl">Zen Sanctuary</h3><p class="text-gray-500 text-sm mt-auto">Japanese Maples + Koi Pond</p></div><span class="text-verdant font-mono text-sm">2025</span></div></div></div>
+                <div class="rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all group flex flex-col h-full"><div class="h-64 overflow-hidden bg-verdant-light"><img src="assets/vertical_garden.png" alt="Vertical Garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"></div><div class="p-5 flex flex-col flex-1"><div class="flex justify-between"><div><h3 class="font-bold text-xl">Urban Oasis</h3><p class="text-gray-500 text-sm mt-auto">Living Wall + Rooftop Terrace</p></div><span class="text-verdant font-mono text-sm">2025</span></div></div></div>
+                <div class="rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all group flex flex-col h-full"><div class="h-64 overflow-hidden bg-soil"><img src="assets/mediterranean_garden.png" alt="Mediterranean Garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"></div><div class="p-5 flex flex-col flex-1"><div class="flex justify-between"><div><h3 class="font-bold text-xl">Mediterranean Retreat</h3><p class="text-gray-500 text-sm mt-auto">Lavender, Olive Trees, Gravel Paths</p></div><span class="text-verdant font-mono text-sm">2024</span></div></div></div>
             </div>
         </div>
     </section>
