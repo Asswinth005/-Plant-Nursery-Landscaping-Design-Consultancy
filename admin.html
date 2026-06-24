@@ -454,6 +454,18 @@
                 </div>
                 <p class="text-xs text-gray-500 dark:text-gray-400 px-2">Admin Portal</p>
             </a>
+            
+            <!-- Sidebar Profile Card -->
+            <div class="mt-4 p-3 bg-verdant/5 dark:bg-verdant/10 rounded-2xl border border-verdant/10 hover:border-verdant/30 cursor-pointer transition-all duration-300 flex items-center gap-3 group/profile shrink-0" data-page-link="profile">
+                <div class="relative w-11 h-11 rounded-full overflow-hidden border-2 border-verdant shrink-0">
+                    <img src="assets/elena_varela.png" alt="Elena Varela" class="w-full h-full object-cover">
+                    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-[#1A1A1A] rounded-full"></span>
+                </div>
+                <div class="overflow-hidden">
+                    <p class="font-bold text-xs text-gray-800 dark:text-gray-205 truncate group-hover/profile:text-verdant transition-colors">Elena Varela</p>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">Lead Architect</p>
+                </div>
+            </div>
         </div>
         <nav class="py-4 flex-grow overflow-y-auto">
             <div class="sidebar-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
@@ -464,6 +476,7 @@
             <div class="sidebar-item" data-page="maintenance"><i class="fas fa-leaf"></i><span>Maintenance Jobs</span></div>
             <div class="sidebar-item" data-page="team"><i class="fas fa-users-gear"></i><span>Garden Team</span></div>
             <div class="sidebar-item" data-page="reports"><i class="fas fa-chart-bar"></i><span>Reports</span></div>
+            <div class="sidebar-item" data-page="profile"><i class="fas fa-user-circle"></i><span>My Profile</span></div>
             <div class="sidebar-item" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></div>
         </nav>
         <div class="p-4 border-t border-verdant/20 dark:border-gray-800 shrink-0 bg-white dark:bg-[#1A1A1A]">
@@ -483,6 +496,32 @@
             <div class="flex items-center gap-4">
                 <button id="theme-toggle-top" class="toggle-btn hidden md:inline-flex"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
                 <button id="rtl-toggle-top" class="toggle-btn hidden md:inline-flex">⇄</button>
+                
+                <!-- Profile Dropdown Container -->
+                <div class="relative">
+                    <button id="profileDropdownBtn" class="flex items-center gap-2 focus:outline-none">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-verdant/30 hover:border-verdant transition-all">
+                            <img src="assets/elena_varela.png" alt="Elena Varela" class="w-full h-full object-cover">
+                        </div>
+                    </button>
+                    <!-- Dropdown Panel -->
+                    <div id="profileDropdown" class="absolute right-0 mt-2 w-56 bg-white dark:bg-[#1E1E1E] rounded-2xl shadow-xl border border-gray-150 dark:border-gray-800 py-2 hidden z-[110]">
+                        <div class="px-4 py-2.5 border-b border-gray-100 dark:border-gray-800">
+                            <p class="font-bold text-sm text-gray-900 dark:text-white">Elena Varela</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 truncate">elena@verdantessence.com</p>
+                        </div>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-verdant/10 hover:text-verdant transition" data-page-link="profile">
+                            <i class="fas fa-user-circle w-4"></i> My Profile
+                        </a>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-verdant/10 hover:text-verdant transition" data-page-link="settings">
+                            <i class="fas fa-cog w-4"></i> Account Settings
+                        </a>
+                        <div class="border-t border-gray-100 dark:border-gray-800 my-1"></div>
+                        <a href="login.html" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 transition">
+                            <i class="fas fa-sign-out-alt w-4"></i> Sign Out
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -592,6 +631,144 @@
                 <button class="btn-primary w-full md:w-auto">Save Changes</button></div>
             </div>
         </div>
+
+        <!-- ===== PROFILE PAGE ===== -->
+        <div id="page-profile" class="page-content hidden">
+            <!-- Cover Banner -->
+            <div class="relative h-44 rounded-3xl overflow-hidden bg-gradient-to-r from-verdant-dark via-verdant to-verdant-light mb-16">
+                <!-- Botanical patterns (overlay) -->
+                <div class="absolute inset-0 opacity-15" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Cpath d=%22M40 0 C45 20 60 35 80 40 C60 45 45 60 40 80 C35 60 20 45 0 40 C20 35 35 20 40 0Z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E'); background-size: 60px;"></div>
+                
+                <!-- Large Avatar Overlay -->
+                <div class="absolute -bottom-12 left-8 flex items-end gap-4">
+                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-white dark:border-[#121212] shadow-lg shrink-0">
+                        <img src="assets/elena_varela.png" alt="Elena Varela" class="w-full h-full object-cover">
+                        <span class="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#121212] rounded-full"></span>
+                    </div>
+                    <div class="mb-2">
+                        <h2 class="text-xl sm:text-2xl font-display font-bold text-white drop-shadow-md">Elena Varela</h2>
+                        <p class="text-xs sm:text-sm text-emerald-100 font-semibold drop-shadow-md">Lead Landscape Architect</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column (Profile Info Card) -->
+                <div class="space-y-6">
+                    <div class="stat-card">
+                        <h3 class="font-display font-bold text-lg mb-4 pb-2 border-b border-verdant/10">About Me</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                            Award-winning landscape architect with 8+ years of experience designing sustainable, native, and luxurious outdoor sanctuaries. Specializes in xeriscaping, water conservation, and Zen garden integrations.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                                <i class="fas fa-envelope text-verdant w-5 text-center"></i>
+                                <span>elena@verdantessence.com</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                                <i class="fas fa-phone text-verdant w-5 text-center"></i>
+                                <span>+1 (512) 555-0143</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
+                                <i class="fas fa-map-marker-alt text-verdant w-5 text-center"></i>
+                                <span>Austin, Texas Office</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-verdant/10 text-verdant rounded-lg text-xs font-semibold">Landscape Architecture</span>
+                            <span class="px-2.5 py-1 bg-verdant/10 text-verdant rounded-lg text-xs font-semibold">Xeriscaping</span>
+                            <span class="px-2.5 py-1 bg-verdant/10 text-verdant rounded-lg text-xs font-semibold">Native Flora</span>
+                            <span class="px-2.5 py-1 bg-verdant/10 text-verdant rounded-lg text-xs font-semibold">LEED AP</span>
+                        </div>
+                    </div>
+
+                    <!-- Professional Certifications -->
+                    <div class="stat-card">
+                        <h3 class="font-display font-bold text-lg mb-4 pb-2 border-b border-verdant/10">Credentials & Licenses</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="font-medium text-gray-700 dark:text-gray-300">ASLA Professional License</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="font-medium text-gray-700 dark:text-gray-300">LEED AP Credentials</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="font-medium text-gray-700 dark:text-gray-300 font-sans">AHS Member</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="font-medium text-gray-700 dark:text-gray-300">Licensed Texas Irrigator</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (Edit Profile Form & Performance Stats) -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-2xl bg-white dark:bg-[#1A1A1A] border border-verdant/15 text-center shadow-sm hover:border-verdant transition-all">
+                            <p class="text-2xl font-bold text-verdant">18</p>
+                            <p class="text-xs text-gray-500">Active Projects</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white dark:bg-[#1A1A1A] border border-verdant/15 text-center shadow-sm hover:border-verdant transition-all">
+                            <p class="text-2xl font-bold text-verdant">342</p>
+                            <p class="text-xs text-gray-500">Completed Designs</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white dark:bg-[#1A1A1A] border border-verdant/15 text-center shadow-sm hover:border-verdant transition-all">
+                            <p class="text-2xl font-bold text-verdant">4.9</p>
+                            <p class="text-xs text-gray-500">Client Rating</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white dark:bg-[#1A1A1A] border border-verdant/15 text-center shadow-sm hover:border-verdant transition-all">
+                            <p class="text-2xl font-bold text-verdant">8 Yrs</p>
+                            <p class="text-xs text-gray-500">Experience</p>
+                        </div>
+                    </div>
+
+                    <!-- Edit Profile Form -->
+                    <div class="stat-card">
+                        <h3 class="font-display font-bold text-xl mb-4 pb-2 border-b border-verdant/10">Personal Settings</h3>
+                        <form id="editProfileForm" class="space-y-4" onsubmit="event.preventDefault(); alert('Profile updated successfully!');">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Full Name</label>
+                                    <input type="text" value="Elena Varela" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Professional Title</label>
+                                    <input type="text" value="Lead Landscape Architect" class="form-input">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Email Address</label>
+                                    <input type="email" value="elena@verdantessence.com" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Phone Number</label>
+                                    <input type="text" value="+1 (512) 555-0143" class="form-input">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Office Location</label>
+                                <input type="text" value="Austin Headquarters, TX" class="form-input">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Professional Biography</label>
+                                <textarea rows="4" class="form-input">Award-winning landscape architect with 8+ years of experience designing sustainable, native, and luxurious outdoor sanctuaries. Specializes in xeriscaping, water conservation, and Zen garden integrations.</textarea>
+                            </div>
+                            <div class="flex justify-end gap-3 mt-4">
+                                <button type="button" class="btn-outline px-6 py-2">Reset</button>
+                                <button type="submit" class="btn-primary px-6 py-2">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -640,9 +817,49 @@
                 maintenance: { title: 'Maintenance Jobs', subtitle: 'Schedule garden services' }, 
                 team: { title: 'Garden Team', subtitle: 'Staff management' }, 
                 reports: { title: 'Reports', subtitle: 'Analytics & insights' }, 
+                profile: { title: 'My Profile', subtitle: 'Manage your professional botanical profile' }, 
                 settings: { title: 'Settings', subtitle: 'System configuration' } 
             };
-            sidebarItems.forEach(item => { item.addEventListener('click', () => { const page = item.getAttribute('data-page'); sidebarItems.forEach(i => i.classList.remove('active')); item.classList.add('active'); pages.forEach(p => p.classList.add('hidden')); document.getElementById(`page-${page}`).classList.remove('hidden'); if (titles[page]) { pageTitle.textContent = titles[page].title; pageSubtitle.textContent = titles[page].subtitle; } closeSidebar(); }); });
+            
+            function navigateTo(page) {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                const activeItem = document.querySelector(`.sidebar-item[data-page="${page}"]`);
+                if (activeItem) activeItem.classList.add('active');
+                pages.forEach(p => p.classList.add('hidden'));
+                const targetPage = document.getElementById(`page-${page}`);
+                if (targetPage) targetPage.classList.remove('hidden');
+                if (titles[page]) {
+                    pageTitle.textContent = titles[page].title;
+                    pageSubtitle.textContent = titles[page].subtitle;
+                }
+                closeSidebar();
+            }
+
+            sidebarItems.forEach(item => { item.addEventListener('click', () => { navigateTo(item.getAttribute('data-page')); }); });
+            
+            // Handle links with data-page-link
+            document.querySelectorAll('[data-page-link]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateTo(btn.getAttribute('data-page-link'));
+                });
+            });
+
+            // Profile Dropdown Toggle
+            const dropdownBtn = document.getElementById('profileDropdownBtn');
+            const dropdownMenu = document.getElementById('profileDropdown');
+            if (dropdownBtn && dropdownMenu) {
+                dropdownBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', () => {
+                    dropdownMenu.classList.add('hidden');
+                });
+                dropdownMenu.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
         });
     </script>
 </body>
