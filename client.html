@@ -495,7 +495,6 @@
             <div class="sidebar-item" data-page="delivery"><i class="fas fa-truck"></i><span>Track Plant Delivery</span></div>
             <div class="sidebar-item" data-page="care"><i class="fas fa-clipboard-list"></i><span>Plant Care Schedules</span></div>
             <div class="sidebar-item" data-page="maintenance"><i class="fas fa-leaf"></i><span>Seasonal Maintenance</span></div>
-            <div class="sidebar-item" data-page="profile"><i class="fas fa-user-circle"></i><span>My Profile</span></div>
             <div class="sidebar-item" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></div>
         </nav>
         <div class="p-4 border-t border-verdant/20 dark:border-gray-800 shrink-0 bg-white dark:bg-[#1A1A1A]">
@@ -659,22 +658,27 @@
 
         <!-- MY PROFILE -->
         <div id="page-profile" class="page-content hidden">
-            <!-- Cover Banner -->
-            <div class="relative h-44 rounded-3xl overflow-hidden bg-gradient-to-r from-verdant-dark via-verdant to-verdant-light mb-16">
-                <!-- Botanical patterns (overlay) -->
-                <div class="absolute inset-0 opacity-15" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Cpath d=%22M40 0 C45 20 60 35 80 40 C60 45 45 60 40 80 C35 60 20 45 0 40 C20 35 35 20 40 0Z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E'); background-size: 60px;"></div>
+            <!-- Cover Banner Wrapper -->
+            <div class="relative mb-20">
+                <!-- Banner Background -->
+                <div class="h-44 rounded-3xl overflow-hidden bg-gradient-to-r from-verdant-dark via-verdant to-verdant-light">
+                    <!-- Botanical patterns (overlay) -->
+                    <div class="absolute inset-0 opacity-15" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 80 80%22%3E%3Cpath d=%22M40 0 C45 20 60 35 80 40 C60 45 45 60 40 80 C35 60 20 45 0 40 C20 35 35 20 40 0Z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E'); background-size: 60px;"></div>
+                </div>
                 
                 <!-- Large Avatar Overlay -->
-                <div class="absolute -bottom-12 left-8 flex items-end gap-4">
-                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-white dark:border-[#121212] shadow-lg shrink-0">
+                <div class="absolute -bottom-16 left-8 z-10">
+                    <div class="relative w-28 h-28 rounded-full overflow-hidden border-4 border-white dark:border-[#121212] shadow-lg shrink-0">
                         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80" alt="Sarah Thompson" class="w-full h-full object-cover">
                         <span class="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#121212] rounded-full"></span>
                     </div>
-                    <div class="mb-2">
-                        <h2 class="text-xl sm:text-2xl font-display font-bold text-white drop-shadow-md">Sarah Thompson</h2>
-                        <p class="text-xs sm:text-sm text-emerald-100 font-semibold drop-shadow-md">Homeowner Client</p>
-                    </div>
                 </div>
+            </div>
+
+            <!-- Profile Info Row (Name and Title below banner, offset by avatar width) -->
+            <div class="pl-40 sm:pl-44 -mt-16 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white">Sarah Thompson</h2>
+                <p class="text-sm text-verdant dark:text-verdant-light font-semibold">Homeowner Client</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
